@@ -30,7 +30,7 @@ import { AuthService } from 'src/services/auth/auth.service';
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '416360443439-jv76cgbf0li3ocmvk33p8etairlgt2lj.apps.googleusercontent.com'
+              '416360443439-vvmqadp7ehr8n07jabq6n6r3s896ifv1.apps.googleusercontent.com'
             )
           }
         ]
