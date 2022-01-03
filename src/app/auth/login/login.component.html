@@ -1,0 +1,35 @@
+<div class="page-wrapper">
+    <div class="login-container">
+        <div class="side-container">
+            <div class="login-modal fullCenter">
+                <div class="login-modal-header noselect">
+                    <h1>Login ✌️</h1>
+                    <p>Let's get things rolling! Get started below...</p>
+                </div>
+                <div class="login-modal-body">
+                    <button (click)="loginWithGoogle()"><div class="icon reg-image"></div>Sign in with Google</button>
+                    <div class="splitter noselect"><span>or Sign in with Email</span><div></div></div>
+                    <div class="login-form">
+                        <div class="input-wrapper">
+                            <p>Email</p>
+                            <input type="text" placeholder="Enter your email..." (keyup.enter)="focusInput('password')">
+                        </div>
+                        <div class="input-wrapper">
+                            <p>Password</p>
+                            <input type="password" id="password" placeholder="Enter your password..." (keyup.enter)="login();">
+                        </div>
+                        <div class="forgot-password">
+                            <a (click)="forgotPassword()">Forgot Password?</a>
+                        </div>
+                        <div class="input-wrapper">
+                            <input type="submit" value="Login" (click)="login();">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="side-container right reg-image">
+
+        </div>
+    </div>
+</div>

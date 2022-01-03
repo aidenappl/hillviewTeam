@@ -31,7 +31,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/global.scss"
             ],
             "scripts": []
           },
@@ -40,13 +40,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "1mb",
+                  "maximumError": "3mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "1mb",
+                  "maximumError": "3mb"
                 }
               ],
               "fileReplacements": [
@@ -99,7 +99,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/global.scss"
             ],
             "scripts": []
           }
