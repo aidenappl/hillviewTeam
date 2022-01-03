@@ -24,4 +24,24 @@ export interface GoogleResponse {
 }
 
 
+export interface GeneralNSM {
+    id: number;
+    name: string;
+    short_name: string;
+}
 
+export interface User {
+    id: number;
+    username: string;
+    name: string;
+    email: string;
+    profile_image_url: string;
+    authentication: GeneralNSM;
+    inserted_at: Date;
+}
+
+export interface LoginResponse {
+    accessToken: string;
+    refreshToken: string;
+    user: User;
+}

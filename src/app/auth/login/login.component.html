@@ -7,22 +7,23 @@
                     <p>Let's get things rolling! Get started below...</p>
                 </div>
                 <div class="login-modal-body">
-                    <button (click)="loginWithGoogle()"><div class="icon reg-image"></div>Sign in with Google</button>
+                    <button (click)="loginWithGoogle()"><div *ngIf="!googleBtn" class="icon reg-image"></div>{{googleBtn ? '' : 'Sign in with Google'}}<div class="loader blk" *ngIf="googleBtn" [style.top]="'38px'"></div></button>
                     <div class="splitter noselect"><span>or Sign in with Email</span><div></div></div>
                     <div class="login-form">
                         <div class="input-wrapper">
                             <p>Email</p>
-                            <input type="text" placeholder="Enter your email..." (keyup.enter)="focusInput('password')">
+                            <input type="text" #emailInput placeholder="Enter your email..." (keyup.enter)="focusInput('password')">
                         </div>
                         <div class="input-wrapper">
                             <p>Password</p>
-                            <input type="password" id="password" placeholder="Enter your password..." (keyup.enter)="login();">
+                            <input type="password" #passwordInput id="password" placeholder="Enter your password..." (keyup.enter)="login();">
                         </div>
                         <div class="forgot-password">
                             <a (click)="forgotPassword()">Forgot Password?</a>
                         </div>
                         <div class="input-wrapper">
-                            <input type="submit" value="Login" (click)="login();">
+                            <div class="loader" *ngIf="localBtn" [style.top]="'18px'"></div>
+                            <input type="submit" [value]="localBtn ? ' ' : 'Login'" (click)="login()">
                         </div>
                     </div>
                 </div>

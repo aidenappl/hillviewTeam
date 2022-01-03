@@ -13,6 +13,10 @@ import { AuthService } from 'src/services/auth/auth.service';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RequestService } from 'src/services/http/request.service';
+import { SessionService } from 'src/services/session/session.service';
+import { UserProvider } from 'src/providers/user.provider';
+import { LandingGuard } from './auth/guards/landing.guard';
+import { AuthGuard } from './auth/guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,11 @@ import { RequestService } from 'src/services/http/request.service';
   providers: [
     AuthService,
     HttpClient,
+    LandingGuard,
+    AuthGuard,
     RequestService,
+    SessionService,
+    UserProvider,
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {
