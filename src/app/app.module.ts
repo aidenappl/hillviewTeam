@@ -11,6 +11,8 @@ import {
 } from 'angularx-social-login';
 import { AuthService } from 'src/services/auth/auth.service';
 import { environment } from 'src/environments/environment';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { RequestService } from 'src/services/http/request.service';
 
 @NgModule({
   declarations: [
@@ -19,10 +21,13 @@ import { environment } from 'src/environments/environment';
   imports: [
     BrowserModule,
     SocialLoginModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
   ],
   providers: [
     AuthService,
+    HttpClient,
+    RequestService,
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {

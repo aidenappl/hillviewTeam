@@ -4,16 +4,16 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/auth/login',
+    redirectTo: '/login',
     pathMatch: 'full'
   },
   {
-    path: 'auth/login',
+    path: 'login',
     loadChildren: () =>
       import('./auth/login/login.module').then((m) => m.LoginModule),
   },
   {
-    path: 'auth/pending',
+    path: 'pending',
     loadChildren: () =>
       import('./auth/pending/pending.module').then((m) => m.PendingModule),
   },
