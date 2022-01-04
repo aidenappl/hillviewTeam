@@ -4,7 +4,7 @@ import { SessionService } from "src/services/session/session.service";
 
 @Injectable()
 
-export class AuthGuard {
+export class UserGuard {
     constructor(
         private session: SessionService,
         private router: Router
@@ -15,10 +15,11 @@ export class AuthGuard {
         if (session) {
             const lander = await this.session.findLander();
             if (lander === '/pending') {
-                this.router.navigate(['/pending']);
+                return true;
+            } else {
+                this.router.navigate(['/redirect']);
                 return false;
             }
-            return true;
         } else {
             this.router.navigate(['/login']);
             return false;
@@ -30,10 +31,11 @@ export class AuthGuard {
         if (session) {
             const lander = await this.session.findLander();
             if (lander === '/pending') {
-                this.router.navigate(['/pending']);
+                return true;
+            } else {
+                this.router.navigate(['/redirect']);
                 return false;
             }
-            return true;
         } else {
             this.router.navigate(['/login']);
             return false;

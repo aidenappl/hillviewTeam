@@ -1,27 +1,35 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-
-import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import {
-  GoogleLoginProvider,
+  SocialLoginModule,
+  SocialAuthServiceConfig,
 } from 'angularx-social-login';
+import { GoogleLoginProvider } from 'angularx-social-login';
 import { AuthService } from 'src/services/auth/auth.service';
 import { environment } from 'src/environments/environment';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import { RequestService } from 'src/services/http/request.service';
 import { SessionService } from 'src/services/session/session.service';
 import { UserProvider } from 'src/providers/user.provider';
 import { LandingGuard } from './auth/guards/landing.guard';
 import { AuthGuard } from './auth/guards/auth.guard';
+import { JwtInterceptor } from 'src/interceptor/jwt.interceptor';
+import { UserGuard } from './auth/guards/user.guard';
+
+export function sessionServiceFactory(provider: SessionService) {
+  return () => provider.initialize();
+}
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     SocialLoginModule,
@@ -33,6 +41,7 @@ import { AuthGuard } from './auth/guards/auth.guard';
     HttpClient,
     LandingGuard,
     AuthGuard,
+    UserGuard,
     RequestService,
     SessionService,
     UserProvider,
@@ -43,14 +52,19 @@ import { AuthGuard } from './auth/guards/auth.guard';
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider(
-              environment.GoogleClientID
-            )
-          }
-        ]
+            provider: new GoogleLoginProvider(environment.GoogleClientID),
+          },
+        ],
       } as SocialAuthServiceConfig,
-    }
+    },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    {
+      provide: APP_INITIALIZER,
+      multi: true,
+      useFactory: sessionServiceFactory,
+      deps: [SessionService],
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

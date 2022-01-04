@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth/guards/auth.guard';
 import { LandingGuard } from './auth/guards/landing.guard';
+import { UserGuard } from './auth/guards/user.guard';
 
 const routes: Routes = [
   {
@@ -18,8 +19,8 @@ const routes: Routes = [
   },
   {
     path: 'pending',
-    canActivate: [AuthGuard],
-    canLoad: [AuthGuard],
+    canActivate: [UserGuard],
+    canLoad: [UserGuard],
     loadChildren: () =>
       import('./auth/pending/pending.module').then((m) => m.PendingModule),
   },

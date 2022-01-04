@@ -85,3 +85,12 @@
         z-index: 1;
     }
 }
+
+@media screen and (max-width: 1200px) {
+    .side-container {
+        width: 80% !important;
+        &.right {
+            width: 20% !important;
+        }
+    }
+}

@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/services/auth/auth.service';
 
 @Component({
@@ -12,7 +13,8 @@ export class LoginComponent implements OnInit {
   @ViewChild('passwordInput', {static: false}) passwordInput!: ElementRef;
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   actionInProg = false;
@@ -40,7 +42,7 @@ export class LoginComponent implements OnInit {
         password: this.passwordInput.nativeElement.value
       });
       if (success) {
-        window.location.href = '/redirect';
+        this.router.navigate(['/redirect']);
       }
       this.actionInProg = false;
       this.localBtn = false;
@@ -58,7 +60,7 @@ export class LoginComponent implements OnInit {
       this.googleBtn = true;
       const success = await this.authService.google();
       if (success) {
-        window.location.href = '/redirect';
+        this.router.navigate(['/redirect']);
       }
       this.actionInProg = false;
       this.googleBtn = false;
