@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { UsersRoutingModule } from './users-routing.module';
 import { UsersComponent } from './users.component';
+import { HeaderModule } from '../../components/header/header.module';
 
 
 @NgModule({
@@ -11,6 +12,7 @@ import { UsersComponent } from './users.component';
   ],
   imports: [
     CommonModule,
+    HeaderModule,
     UsersRoutingModule
   ]
 })
