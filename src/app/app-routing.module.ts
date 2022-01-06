@@ -39,7 +39,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./auth/logout/logout.module').then((m) => m.LogoutModule),
   },
-  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
+  {
+    path: 'admin',
+    canActivate: [AdminGuard],
+    canLoad: [AdminGuard],
+    loadChildren: () =>
+      import('./admin/admin.module').then((m) => m.AdminModule),
+  },
   {
     path: '**',
     loadChildren: () =>
