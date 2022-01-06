@@ -20,9 +20,10 @@ import { RequestService } from 'src/services/http/request.service';
 import { SessionService } from 'src/services/session/session.service';
 import { UserProvider } from 'src/providers/user.provider';
 import { LandingGuard } from './auth/guards/landing.guard';
-import { AuthGuard } from './auth/guards/auth.guard';
+import { AdminGuard } from './auth/guards/admin.guard';
 import { JwtInterceptor } from 'src/interceptor/jwt.interceptor';
 import { UserGuard } from './auth/guards/user.guard';
+import { AuthenticationGuard } from './auth/guards/authentication.guard';
 
 export function sessionServiceFactory(provider: SessionService) {
   return () => provider.initialize();
@@ -40,7 +41,8 @@ export function sessionServiceFactory(provider: SessionService) {
     AuthService,
     HttpClient,
     LandingGuard,
-    AuthGuard,
+    AuthenticationGuard,
+    AdminGuard,
     UserGuard,
     RequestService,
     SessionService,

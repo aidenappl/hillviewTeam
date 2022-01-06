@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserProvider } from 'src/providers/user.provider';
 import { AuthService } from 'src/services/auth/auth.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private user: UserProvider
   ) { }
 
   actionInProg = false;
@@ -42,7 +44,7 @@ export class LoginComponent implements OnInit {
         password: this.passwordInput.nativeElement.value
       });
       if (success) {
-        this.router.navigate(['/redirect']);
+        this.user.goHome();
       }
       this.actionInProg = false;
       this.localBtn = false;
@@ -60,7 +62,7 @@ export class LoginComponent implements OnInit {
       this.googleBtn = true;
       const success = await this.authService.google();
       if (success) {
-        this.router.navigate(['/redirect']);
+        this.user.goHome();
       }
       this.actionInProg = false;
       this.googleBtn = false;

@@ -1,10 +1,13 @@
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { User } from "src/services/auth/auth.interfaces";
 
 @Injectable()
 
 export class UserProvider {
-    constructor() {}
+    constructor(
+        private router: Router
+    ) {}
 
     private user: User | null = null;
 
@@ -28,6 +31,22 @@ export class UserProvider {
 
     isNull(): boolean {
         return this.user === null;
+    }
+
+    goHome(): void {
+        if (this.user === null) {
+            this.router.navigate(['/login']);
+            return;
+        }
+        if (this.user.authentication.short_name === 'unauthorized') {
+            this.router.navigate(['/pending']);
+        }
+        if (this.user.authentication.short_name === 'studnet') {
+            this.router.navigate(['/student']);
+        }
+        if (this.user.authentication.short_name === 'admin') {
+            this.router.navigate(['/admin']);
+        }
     }
 
 }

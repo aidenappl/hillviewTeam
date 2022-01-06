@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './auth/guards/auth.guard';
+import { AdminGuard } from './auth/guards/admin.guard';
+import { AuthenticationGuard } from './auth/guards/authentication.guard';
 import { LandingGuard } from './auth/guards/landing.guard';
 import { UserGuard } from './auth/guards/user.guard';
 
@@ -26,18 +27,19 @@ const routes: Routes = [
   },
   {
     path: 'redirect',
-    canActivate: [AuthGuard],
-    canLoad: [AuthGuard],
+    canActivate: [AuthenticationGuard],
+    canLoad: [AuthenticationGuard],
     loadChildren: () =>
       import('./auth/redirect/redirect.module').then((m) => m.RedirectModule),
   },
   {
     path: 'logout',
-    canActivate: [AuthGuard],
-    canLoad: [AuthGuard],
+    canActivate: [AuthenticationGuard],
+    canLoad: [AuthenticationGuard],
     loadChildren: () =>
       import('./auth/logout/logout.module').then((m) => m.LogoutModule),
   },
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
   {
     path: '**',
     loadChildren: () =>

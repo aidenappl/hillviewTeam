@@ -1,14 +1,12 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { UserProvider } from "src/providers/user.provider";
 import { SessionService } from "src/services/session/session.service";
 
 @Injectable()
 
-export class UserGuard {
+export class AdminGuard {
     constructor(
         private session: SessionService,
-        private user: UserProvider,
         private router: Router
     ) {}
 
@@ -17,11 +15,10 @@ export class UserGuard {
         if (session) {
             const lander = await this.session.findLander();
             if (lander === '/pending') {
-                return true;
-            } else {
-                this.user.goHome();
+                this.router.navigate(['/pending']);
                 return false;
             }
+            return true;
         } else {
             this.router.navigate(['/login']);
             return false;
@@ -33,11 +30,10 @@ export class UserGuard {
         if (session) {
             const lander = await this.session.findLander();
             if (lander === '/pending') {
-                return true;
-            } else {
-                this.user.goHome();
+                this.router.navigate(['/pending']);
                 return false;
             }
+            return true;
         } else {
             this.router.navigate(['/login']);
             return false;

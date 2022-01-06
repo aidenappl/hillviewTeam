@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserProvider } from 'src/providers/user.provider';
 
 @Component({
   selector: 'app-redirect',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RedirectComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private user: UserProvider
+  ) { }
 
   ngOnInit(): void {
+
   }
 
 }
