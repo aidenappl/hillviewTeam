@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouteReuseStrategy, RouterModule, Routes } from '@angular/router';
 import { AdminGuard } from './auth/guards/admin.guard';
 import { AuthenticationGuard } from './auth/guards/authentication.guard';
 import { LandingGuard } from './auth/guards/landing.guard';
@@ -38,7 +38,7 @@ const routes: Routes = [
     canLoad: [AuthenticationGuard],
     loadChildren: () =>
       import('./auth/logout/logout.module').then((m) => m.LogoutModule),
-  },
+    },
   {
     path: 'admin',
     canActivate: [AdminGuard],
@@ -55,6 +55,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}

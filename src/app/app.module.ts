@@ -24,6 +24,7 @@ import { AdminGuard } from './auth/guards/admin.guard';
 import { JwtInterceptor } from 'src/interceptor/jwt.interceptor';
 import { UserGuard } from './auth/guards/user.guard';
 import { AuthenticationGuard } from './auth/guards/authentication.guard';
+import { RouteReuseStrategy } from '@angular/router';
 
 export function sessionServiceFactory(provider: SessionService) {
   return () => provider.initialize();

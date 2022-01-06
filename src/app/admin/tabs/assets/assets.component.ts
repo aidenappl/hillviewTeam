@@ -10,7 +10,7 @@ export class AssetsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    window.alert("hey")
+    console.error('ng')
   }
 
 }

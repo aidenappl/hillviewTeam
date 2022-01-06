@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouteReuseStrategy, RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
 
 const routes: Routes = [
@@ -15,7 +15,7 @@ const routes: Routes = [
       {
         path: 'r',
         loadChildren: () =>
-          import('./tabs/tabs.module').then((m) => m.TabsModule),
+          import('./tabs/tabs.module').then((m) => m.TabsModule)
       },
     ],
   },
@@ -23,6 +23,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AdminRoutingModule {}

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserProvider } from 'src/providers/user.provider';
 
 @Component({
   selector: 'app-tabs',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TabsComponent implements OnInit {
 
-  constructor() { }
+  selectedTab = '';
 
-  ngOnInit(): void {
+  constructor(
+    public user: UserProvider,
+    private router: Router
+  ) { }
+
+  ngOnInit() {
+    this.selectedTab = this.router.url.split('/')[3];
+  }
+
+  tabPress(val: string): void {
+    this.selectedTab = val;
   }
 
 }
