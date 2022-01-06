@@ -59,9 +59,9 @@ export class SessionService {
         this.checkTokenExpiration();
         return true;
       } else {
-          if (accessToken || refreshToken) {
-            this.logout();
-          }
+        if (accessToken || refreshToken) {
+          this.logout();
+        }
         return false;
       }
     } catch (error) {
