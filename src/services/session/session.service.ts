@@ -127,7 +127,7 @@ export class SessionService {
   async initializeUser(): Promise<void> {
     try {
       const response: any = await this.request.get(
-        `${environment.API_URL}/user`
+        `${environment.AUTH_API_URL}/user`
       );
       this.user.set(response.body as User);
     } catch (err) {
@@ -142,7 +142,7 @@ export class SessionService {
     return refreshToken.pipe(
       switchMap((token: any) => {
         if (token) {
-          return this.http.post(`${environment.API_URL}/token`, {
+          return this.http.post(`${environment.AUTH_API_URL}/token`, {
             grant_type: 'refresh_token',
             refresh_token: rts,
           });
@@ -161,7 +161,7 @@ export class SessionService {
   async reissueAccessToken(): Promise<any> {
     try {
       const tokenResponder = await this.request.post(
-        `${environment.API_URL}/token`,
+        `${environment.AUTH_API_URL}/token`,
         {
           refresh_token: await this.get('refreshToken'),
         }

@@ -24,6 +24,10 @@
     }
 }
 
+.loading-wrapper {
+    top: 250px;
+}
+
 .appender-header {
     width: 100%;
     height: 70px;
@@ -32,6 +36,7 @@
         position: relative;
         transform: translateY(-50%);
         top: 50%;
+        font-weight: 600;
     }
     .hr {
         width: 100%;

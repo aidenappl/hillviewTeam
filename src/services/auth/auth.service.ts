@@ -28,7 +28,7 @@ export class AuthService {
       ) {
         // Get Hillview Tokens + User Profile
         const userFromAuth = await this.request.post(
-          `${environment.API_URL}/google`,
+          `${environment.AUTH_API_URL}/google`,
           response
         );
         if (userFromAuth.body) {
@@ -69,7 +69,7 @@ export class AuthService {
             password: req.password
         }
         const userFromAuth = await this.request.post(
-          `${environment.API_URL}/local`,
+          `${environment.AUTH_API_URL}/local`,
           data
         );
         if (userFromAuth.body) {

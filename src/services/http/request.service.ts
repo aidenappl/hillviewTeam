@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class RequestService {
-  server = environment.API_URL;
+  server = environment.AUTH_API_URL;
 
   constructor(private http: HttpClient) {}
 
