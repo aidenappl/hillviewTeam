@@ -98,19 +98,11 @@ export class JwtInterceptor implements HttpInterceptor {
     err: any
   ): Observable<any> {
     if (err.error) {
-      if (!err.error.message) {
-        if (err.error.errors.toString().includes('calling user does not have a type')) {
-          window.location.href = 'https://accounts.grindstoneapp.com/o/oauth/type?redirectURI=' + window.location.href;
-          throw err
-        } else {
-          return throwError(err);
-        }
-      }
-      if (err.error.message.toString().includes('missing bearer')) {
+      if (err.error.toString().includes('missing bearer')) {
         console.log('missing bearer token');
         return next.handle(this.addToken(request));
       } else if (
-        err.error.message.toString().includes('expired bearer token')
+        err.error.toString().includes('expired')
       ) {
         // Token Expired
         console.error(

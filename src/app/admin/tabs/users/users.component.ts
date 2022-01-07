@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsersComponent implements OnInit {
 
+  selectedDatabase = 'system';
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  changedDataSource(event: any): void {
+    console.log(event.target.value);
+    this.selectedDatabase = event.target.value;
   }
 
 }
