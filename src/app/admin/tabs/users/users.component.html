@@ -18,26 +18,55 @@
                     </div>
                 </div>
             </div>
-            <div class="appender-header">
+            <!-- System Header -->
+            <div class="appender-header" *ngIf="selectedDatabase === 'system'">
                 <div class="object"><p></p></div>
                 <div class="object"><p>Name</p></div>
+                <div class="object"><p>Username</p></div>
                 <div class="object"><p>Email</p></div>
                 <div class="object"><p>Last Active</p></div>
                 <div class="object"><p>Permissions</p></div>
                 <div class="object"><p></p></div>
                 <div class="hr"></div>
             </div>
+            <!-- Mobile Header -->
+            <div class="appender-header" *ngIf="selectedDatabase === 'mobile'">
+                <div class="object mobile"><p></p></div>
+                <div class="object mobile"><p>Name</p></div>
+                <div class="object mobile"><p>Identifier</p></div>
+                <div class="object mobile"><p>Email</p></div>
+                <div class="object mobile"><p>Checkouts</p></div>
+                <div class="object mobile"><p></p></div>
+                <div class="hr"></div>
+            </div>
             <div class="loading-wrapper fullXCenter" *ngIf="!loaded">
                 <div class="loader blk"></div>
             </div>
-            <div class="users-appender" *ngIf="loaded">
+            <!-- System Accounts -->
+            <div class="users-appender" *ngIf="loaded && selectedDatabase === 'system'">
                 <div class="user" *ngFor="let user of listData.system" [hidden]="!loaded">
                     <div class="object"><div class="avatar fullCenter reg-image" [ngStyle]="{'background-image': 'url('+user.profile_image_url}"></div></div>
                     <div class="object"><p>{{user.name}}</p></div>
+                    <div class="object"><p *ngIf="user.username">@{{user.username}}</p><a (click)="claimUsername(user);" *ngIf="!user.username">Claim</a></div>
                     <div class="object"><p>{{user.email}}</p></div>
-                    <div class="object"><p>Last Active</p></div>
+                    <div class="object"><p>{{user.display ? user.display.last_active : "Pending"}}</p></div>
                     <div class="object"><p>{{user.authentication.name}}</p></div>
                     <div class="object">
+                        <div class="central-inputs fullCenter">
+                            <button>Inspect</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Accounts -->
+            <div class="users-appender" *ngIf="loaded && selectedDatabase === 'mobile'">
+                <div class="user" *ngFor="let user of listData.mobile" [hidden]="!loaded">
+                    <div class="object mobile"><div class="avatar fullCenter reg-image" [ngStyle]="{'background-image': 'url('+user.profile_image_url}"></div></div>
+                    <div class="object mobile"><p>{{user.name}}</p></div>
+                    <div class="object mobile"><p>{{user.identifier}}</p></div>
+                    <div class="object mobile"><p>{{user.email}}</p></div>
+                    <div class="object mobile"><p>Pending</p></div>
+                    <div class="object mobile">
                         <div class="central-inputs fullCenter">
                             <button>Inspect</button>
                         </div>

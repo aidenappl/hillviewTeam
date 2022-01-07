@@ -5,9 +5,9 @@ import { SocialAuthService } from 'angularx-social-login';
 import { from, of, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { UserProvider } from 'src/providers/user.provider';
-import { User } from '../auth/auth.interfaces';
 import { RequestService } from '../http/request.service';
 import jwt_decode from 'jwt-decode';
+import { User } from 'src/providers/user.interface';
 
 @Injectable()
 export class SessionService {

@@ -15,14 +15,21 @@ const routes: Routes = [
       {
         path: 'r',
         loadChildren: () =>
-          import('./tabs/tabs.module').then((m) => m.TabsModule)
+          import('./tabs/tabs.module').then((m) => m.TabsModule),
       },
     ],
+  },
+  {
+    path: 'tools/mobileRegister',
+    loadChildren: () =>
+      import('./tools/mobile-register/mobile-register.module').then(
+        (m) => m.MobileRegisterModule
+      ),
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AdminRoutingModule {}

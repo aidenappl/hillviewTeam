@@ -1,3 +1,5 @@
+import { User } from "src/providers/user.interface";
+
 export interface Response {
     token_type: string;
     access_token: string;
@@ -23,22 +25,6 @@ export interface GoogleResponse {
     provider: string;
 }
 
-
-export interface GeneralNSM {
-    id: number;
-    name: string;
-    short_name: string;
-}
-
-export interface User {
-    id: number;
-    username: string;
-    name: string;
-    email: string;
-    profile_image_url: string;
-    authentication: GeneralNSM;
-    inserted_at: Date;
-}
 
 export interface LoginResponse {
     accessToken: string;

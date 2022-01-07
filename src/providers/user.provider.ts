@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { User } from "src/services/auth/auth.interfaces";
+import { User } from "./user.interface";
 
 @Injectable()
 
