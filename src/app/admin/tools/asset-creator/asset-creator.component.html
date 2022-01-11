@@ -1,0 +1,43 @@
+<div class="page-wrapper">
+    <div class="center-form fullXCenter">
+        <h1>Asset Builder</h1>
+        <div class="input-wrapper">
+            <p>Asset Name</p>
+            <input #nameInput type="text" placeholder="Enter Asset Name">
+        </div>
+        <div class="input-wrapper">
+            <p>Asset Description</p>
+            <textarea #descriptionInput placeholder="Enter Asset Description"></textarea>
+        </div>
+        <div class="input-wrapper">
+            <p>Asset Tag</p>
+            <input #tagInput type="text" placeholder="Enter Asset Tag">
+        </div>
+        <div class="input-wrapper">
+            <p>Asset Category</p>
+            <select>
+                <option>Camera</option>
+            </select>
+        </div>
+        <div class="input-wrapper">
+            <p>Asset Serial Number</p>
+            <input #serialInput type="text" placeholder="Enter Asset Serial Number">
+        </div>
+        <div class="input-wrapper">
+            <p>Asset Manufacturer</p>
+            <input #manufacturerInput type="text" placeholder="Enter Asset Manufacturer">
+        </div>
+        <div class="input-wrapper">
+            <p>Asset Model</p>
+            <input #modelInput type="text" placeholder="Enter Asset Model">
+        </div>
+        <div class="input-wrapper">
+            <p>Asset Notes</p>
+            <textarea #notesInput placeholder="Enter Asset Notes"></textarea>
+        </div>
+        <div class="input-wrapper">
+            <div class="loader" *ngIf="loading" [style.top]="'18px'"></div>
+            <input (click)="submit()" type="submit" [value]="loading ? '' : 'Create Asset'">
+        </div>
+    </div>
+</div>
