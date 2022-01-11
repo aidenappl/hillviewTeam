@@ -1,3 +1,7 @@
+.center-form {
+    width: 500px;
+}
+
 .fill-wrapper {
     width: 400px;
     height: 20px;
@@ -11,6 +15,11 @@
         transition: .5s;
         background: blue;
     }
+}
+
+.retakePhoto {
+    bottom: 6%;
+    width: 50%;
 }
 
 .step {

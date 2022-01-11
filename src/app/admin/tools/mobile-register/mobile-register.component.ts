@@ -1,17 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 //import COCO-SSD model as cocoSSD
 import * as cocoSSD from '@tensorflow-models/coco-ssd';
 import '@tensorflow/tfjs-backend-webgl';
 import '@tensorflow/tfjs-backend-cpu';
+import { RequestService } from 'src/services/http/request.service';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-mobile-register',
   templateUrl: './mobile-register.component.html',
   styleUrls: ['./mobile-register.component.scss'],
 })
 export class MobileRegisterComponent implements OnInit {
-  title = 'TF-ObjectDetection';
+
+  @ViewChild('nameInput', { static: false }) nameInput!: ElementRef;
+  @ViewChild('emailInput', { static: false }) emailInput!: ElementRef;
+  @ViewChild('tagInput', { static: false }) tagInput!: ElementRef;
+
   private video!: HTMLVideoElement;
+
+  step: number = 1;
 
   score: number = 0;
   fill: number = 0;
@@ -21,13 +29,75 @@ export class MobileRegisterComponent implements OnInit {
   showPhotoSys = false;
   showLoader = true;
 
+  loading = false;
+
   preview: string = '';
 
   grabbed: boolean = false;
 
   complete: boolean = false;
 
+  constructor(
+    private request: RequestService
+  ) {
+
+  }
+
   ngOnInit() {}
+
+  nextStep(): void {
+
+    let errs = false;
+
+    const data = {
+      name: this.nameInput.nativeElement.value,
+      email: this.emailInput.nativeElement.value,
+      tag: this.tagInput.nativeElement.value,
+    }
+    Object.values(data).forEach((value, index) => {
+      if (!value) {
+        window.alert(`Missing ${Object.keys(data)[index]}`);
+        errs = true;
+      }
+    })
+    if (errs) {
+      this.loading = false;
+      return;
+    }
+    
+    this.step++;
+  }
+
+  async done(): Promise<void> {
+    try {
+      let errs = false;
+      this.loading = true;
+      const data = {
+        photo_url: "",
+        name: this.nameInput.nativeElement.value,
+        email: this.emailInput.nativeElement.value,
+        tag: this.tagInput.nativeElement.value,
+      }
+      Object.values(data).forEach((value, index) => {
+        if (!value) {
+          window.alert(`Missing ${Object.keys(data)[index]}`);
+          errs = true;
+        }
+      })
+      if (errs) {
+        this.loading = false;
+        return;
+      }
+
+      const response = await this.request.post(`${environment.ASSET_API_URL}/create/user`, data)
+      if (response.status === 201) {
+        window.alert('User created successfully');
+        window.location.reload();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   retakeProfilePhoto(): void {
     this.showLoader = true;
@@ -72,7 +142,7 @@ export class MobileRegisterComponent implements OnInit {
           this.fill = 0;
           this.score = 0;
         }
-      }, 200);
+      }, 300);
       setInterval(() => {
         var circle: any = document.querySelector('circle');
         var radius = circle.r.baseVal.value;
@@ -151,7 +221,7 @@ export class MobileRegisterComponent implements OnInit {
           const score = Math.round(prediction.score * 100);
           if (this.startRunning) {
             if (score > this.score) {
-              if (this.score > 90) {
+              if (this.score > 85) {
                 this.countOver++;
                 if (this.countOver > 5) {
                   this.fill = 100;

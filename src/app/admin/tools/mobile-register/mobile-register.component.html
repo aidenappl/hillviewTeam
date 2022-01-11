@@ -1,7 +1,31 @@
 <div class="page-wrapper">
-  <div class="step">
-    <button (click)="takeProfilePhoto()">Take Profile Photo</button>
-    <button (click)="retakeProfilePhoto()">Retake Profile Photo</button>
+  <div class="step" [hidden]="step != 1">
+    <div class="center-form fullCenter">
+      <h1>User Form</h1>
+      <div class="input-wrapper">
+        <p>Full Name</p>
+        <input #nameInput type="text" placeholder="Enter your full name">
+      </div>
+      <div class="input-wrapper">
+        <p>Email</p>
+        <input #emailInput type="text" placeholder="Enter your school email">
+      </div>
+      <div class="input-wrapper">
+        <p>StudentID</p>
+        <input #tagInput type="text" placeholder="Enter your student id">
+      </div>
+      <div class="input-wrapper">
+        <input type="submit" value="Done" (click)="done()">
+      </div>
+    </div>
+  </div>
+  <div class="step" [hidden]="step != 2">
+    <div class="center-form fullCenter">
+      <h1 *ngIf="showLoader">Quick Snap!</h1>
+      <div class="input-wrapper" [hidden]="!showLoader">
+        <input type="submit" value="Take Photo" *ngIf="!showPhotoSys" (click)="takeProfilePhoto()">
+      </div>
+    </div>
     <div class="photo-sys" *ngIf="showPhotoSys">
         <img [src]="preview" *ngIf="preview != ''" class="fullCenter preview-capture"/>
         <video hidden id="vid" width="300" height="300"></video>
@@ -12,6 +36,10 @@
             <svg [hidden]="showLoader" _ngcontent-tmi-c18="" height="650" width="650" class="progress-ring fullCenter"><circle [hidden]="showLoader" _ngcontent-tmi-c18="" stroke-width="16" stroke="#3067f6" fill="transparent" r="308" cx="325" cy="325" class="progress-ring__circle"></circle></svg>
             <div [hidden]="showLoader" class="completion-circle fullCenter"></div>
             <canvas id="canvas"></canvas>
+        </div>
+        <div class="input-wrapper fullXCenter retakePhoto">
+          <input type="submit" value="Retake Photo" *ngIf="showPhotoSys" (click)="retakeProfilePhoto()">
+          <input type="submit" value="Done" *ngIf="showPhotoSys" (click)="done()" style="margin-top: 20px;">
         </div>
     </div>
   </div>
