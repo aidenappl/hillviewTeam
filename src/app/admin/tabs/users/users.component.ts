@@ -6,6 +6,7 @@ import { RequestService } from 'src/services/http/request.service';
 import * as dayjs from 'dayjs';
 import * as relativeTime from 'dayjs/plugin/relativeTime';
 import * as updateLocale from 'dayjs/plugin/updateLocale';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export interface ListDataArr {
   system: Array<User>,
@@ -28,7 +29,9 @@ export class UsersComponent implements OnInit {
   }
 
   constructor(
-    private request: RequestService
+    private request: RequestService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { 
     dayjs.extend(relativeTime);
     dayjs.extend(updateLocale);
@@ -52,14 +55,25 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {    
+    this.route.queryParams.subscribe((params: any) => {
+      if (params.source) {
+        this.selectedDatabase = params.source;
+      }
+    })
     this.initialize();
   }
 
   async initialize(): Promise<void> {
     try {
-      this.listData.system = await this.getSystemUsers();
-      this.formatSystemUsers();
-      this.loaded = true;
+      if (this.selectedDatabase === 'mobile') {
+        this.listData.mobile = await this.getMobileUsers();
+        this.formatMobileUsers();
+        this.loaded = true;
+      } else if (this.selectedDatabase === 'system') {
+        this.listData.system = await this.getSystemUsers();
+        this.formatSystemUsers();
+        this.loaded = true;
+      }
     } catch (error) {
       console.error(error)
     }
@@ -94,7 +108,7 @@ export class UsersComponent implements OnInit {
 
   async getMobileUsers(): Promise<MobileUser[]> {
     try {
-      const response = await this.request.get(`${environment.CORE_API_URL}/admin/list/mobileUsers/15`)
+      const response = await this.request.get(`${environment.CORE_API_URL}/admin/list/mobileUsers/50`)
       return (response.body as MobileUser[])
     } catch (error) {
       throw error
@@ -116,6 +130,13 @@ export class UsersComponent implements OnInit {
   async changedDataSource(event: any): Promise<void> {
     try {
       this.selectedDatabase = event.target.value;
+      this.router.navigate(
+        [], 
+        {
+          relativeTo: this.route,
+          queryParams: { source: this.selectedDatabase },
+          queryParamsHandling: 'merge'
+        });
       this.loaded = false;
       if (this.selectedDatabase === 'mobile') {
         // Get mobile accts

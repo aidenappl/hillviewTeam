@@ -85,6 +85,7 @@
                         <p>{{user.get().authentication.name}} user</p>
                     </div>
                 </div>
+                <a [routerLink]="'/admin/r/settings'"></a>
             </div>
             <div class="options-block spacer">
                 <div class="option" [class.active]="selectedTab === 'settings'" (click)="tabPress('settings')">

@@ -17,7 +17,7 @@ export class TabsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.selectedTab = this.router.url.split('/')[3];
+    this.selectedTab = this.router.url.split('/')[3].split("?")[0];
   }
 
   tabPress(val: string): void {

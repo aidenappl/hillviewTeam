@@ -8,7 +8,7 @@
                     <div class="source-object fullYCenter">
                         <p>Source: <b>{{selectedDatabase === 'system' ? 'Dashboard' : 'Mobile'}}</b></p>
                         <div class="arr"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
-                        <select (change)="changedDataSource($event)">
+                        <select (change)="changedDataSource($event)" [value]="selectedDatabase">
                             <option id="system" value="system">Dashboard Accounts</option>
                             <option id="mobile" value="mobile">Mobile Accounts</option>
                         </select>
