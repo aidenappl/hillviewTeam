@@ -1,9 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 //import COCO-SSD model as cocoSSD
-import * as cocoSSD from '@tensorflow-models/coco-ssd';
-import '@tensorflow/tfjs-backend-webgl';
-import '@tensorflow/tfjs-backend-cpu';
 import { RequestService } from 'src/services/http/request.service';
 import { environment } from 'src/environments/environment';
 @Component({
@@ -163,8 +160,8 @@ export class MobileRegisterComponent implements OnInit {
   }
 
   public async predictWithCocoModel() {
-    const model = await cocoSSD.load('lite_mobilenet_v2' as any);
-    this.detectFrame(this.video, model);
+    // const model = await cocoSSD.load('lite_mobilenet_v2' as any);
+    // this.detectFrame(this.video, model);
   }
 
   webcam_init() {
