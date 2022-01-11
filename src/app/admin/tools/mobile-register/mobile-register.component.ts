@@ -73,7 +73,7 @@ export class MobileRegisterComponent implements OnInit {
       let errs = false;
       this.loading = true;
       const data = {
-        photo_url: "",
+        photo_url: "https://google.com",
         name: this.nameInput.nativeElement.value,
         email: this.emailInput.nativeElement.value,
         tag: this.tagInput.nativeElement.value,
