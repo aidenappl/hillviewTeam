@@ -2,9 +2,42 @@
     <div class="admin-container">
         <app-admin-header [title]="'Checkouts'"></app-admin-header>
         <div class="admin-primary-body">
-            <ul>
-                <li *ngFor="let checkout of checkouts">{{checkout.user.name}} checked out "{{checkout.asset.name}}". Checked In? {{checkout.checkout_status.id === 2}}</li>
-            </ul>
+            <div class="data-header">
+                <h2 class="fullYCenter">Recent Checkouts</h2>
+                <div class="right-container">
+                    <div class="filter-action fullYCenter">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+                    </div>
+                </div>
+            </div>
+            <!-- System Header -->
+            <div class="appender-header">
+                <div class="object"><p></p></div>
+                <div class="object"><p>Name</p></div>
+                <div class="object"><p>Asset</p></div>
+                <div class="object"><p>Time Out</p></div>
+                <div class="object"><p>Time In</p></div>
+                <div class="object"><p></p></div>
+                <div class="hr"></div>
+            </div>
+            <div class="loading-wrapper fullXCenter" *ngIf="!loaded">
+                <div class="loader blk"></div>
+            </div>
+            <!-- System Accounts -->
+            <div class="checkouts-appender" *ngIf="loaded">
+                <div class="checkout" *ngFor="let checkout of checkouts" [hidden]="!loaded">
+                    <div class="object"><div class="avatar fullCenter reg-image" [ngStyle]="{'background-image': 'url('+checkout.user.profile_image_url+')'}"></div></div>
+                    <div class="object"><p>{{checkout.user.name}}</p></div>
+                    <div class="object"><p>{{checkout.asset.name}}</p></div>
+                    <div class="object"><p>{{checkout.display.time_out}}</p></div>
+                    <div class="object"><p [class.bold]="checkout.checkout_status.id === 1">{{checkout.display.time_in}}</p></div>
+                    <div class="object">
+                        <div class="central-inputs fullCenter">
+                            <button>Inspect</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

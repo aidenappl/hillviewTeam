@@ -12,6 +12,11 @@ export interface Asset {
     active_tab?: any;
 }
 
+export interface CheckoutDisplays {
+    time_out?: string;
+    time_in?: string;
+    expected_in?: string;
+}
 export interface Checkout {
     id: number;
     user: MobileUser;
@@ -22,6 +27,7 @@ export interface Checkout {
     checkout_status: GeneralNSM;
     checkout_notes: string;
     time_out: Date;
+    display: CheckoutDisplays;
     time_in?: Date;
     expected_in: Date;
 }
