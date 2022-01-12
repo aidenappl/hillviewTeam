@@ -1,1 +1,10 @@
-<p>checkouts works!</p>
+<div class="page-wrapper">
+    <div class="admin-container">
+        <app-admin-header [title]="'Checkouts'"></app-admin-header>
+        <div class="admin-primary-body">
+            <ul>
+                <li *ngFor="let checkout of checkouts">{{checkout.user.name}} checked out "{{checkout.asset.name}}". Checked In? {{checkout.checkout_status.id === 2}}</li>
+            </ul>
+        </div>
+    </div>
+</div>

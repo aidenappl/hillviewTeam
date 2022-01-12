@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AssetsRoutingModule } from './assets-routing.module';
 import { AssetsComponent } from './assets.component';
+import { HeaderModule } from '../../components/header/header.module';
 
 
 @NgModule({
@@ -11,6 +12,7 @@ import { AssetsComponent } from './assets.component';
   ],
   imports: [
     CommonModule,
+    HeaderModule,
     AssetsRoutingModule
   ]
 })

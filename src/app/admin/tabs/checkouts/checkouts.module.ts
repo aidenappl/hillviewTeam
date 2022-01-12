@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { CheckoutsRoutingModule } from './checkouts-routing.module';
 import { CheckoutsComponent } from './checkouts.component';
+import { HeaderModule } from '../../components/header/header.module';
 
 
 @NgModule({
@@ -11,6 +12,7 @@ import { CheckoutsComponent } from './checkouts.component';
   ],
   imports: [
     CommonModule,
+    HeaderModule,
     CheckoutsRoutingModule
   ]
 })
