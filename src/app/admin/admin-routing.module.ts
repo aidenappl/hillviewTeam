@@ -33,6 +33,7 @@ const routes: Routes = [
         (m) => m.AssetCreatorModule
       ),
   },
+  { path: 'tools/videoUploader', loadChildren: () => import('./tools/video-uploader/video-uploader.module').then(m => m.VideoUploaderModule) },
 ];
 
 @NgModule({

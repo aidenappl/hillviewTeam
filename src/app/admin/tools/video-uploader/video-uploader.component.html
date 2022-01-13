@@ -1,0 +1,26 @@
+<div class="page-wrapper">
+    <div class="center-form fullXCenter">
+        <h1>Video Uploader</h1>
+        <div class="form-group">
+            <div class="uploader-wrapper">
+                <div class="loader" *ngIf="showFileLoader" [style.top]="'18px'"></div>
+                <button [hidden]="fileLink.length > 0" (click)="uploadFilePress()">{{showFileLoader ? ' ' : 'Upload File'}}</button>
+                <input #uploadVideoInput type="file" value="Upload a video" (change)="fileUploadChange($event)">
+                <p>{{fileNameTag}}</p>
+                <a [href]="fileLink" target="_blank">{{fileLink}}</a>
+            </div>
+            <div class="input-wrapper">
+                <p>Video Title</p>
+                <input type="text" placeholder="Enter a video title" #titleInput>
+            </div>
+            <div class="input-wrapper">
+                <p>Video Description</p>
+                <textarea type="text" placeholder="Enter a video description" #descriptionInput></textarea>
+            </div>
+            <div class="input-wrapper">
+                <div class="loader" *ngIf="showLoader" [style.top]="'18px'"></div>
+                <input type="submit" value="{{videoSubmitButtonVal}}" (click)="submit()">
+            </div>
+        </div>
+    </div>
+</div>

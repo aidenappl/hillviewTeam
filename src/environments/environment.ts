@@ -5,5 +5,6 @@ export const environment = {
   AUTH_API_URL: 'https://api.hillview.tv/auth/v1.1',
   // CORE_API_URL: 'http://localhost:8000/core/v1.1',
   CORE_API_URL: 'https://api.hillview.tv/core/v1.1',
-  ASSET_API_URL: 'https://api.hillview.tv/assets/v1.1'
+  ASSET_API_URL: 'https://api.hillview.tv/assets/v1.1',
+  VIDEO_API_URL: 'https://api.hillview.tv/video/v1.1'
 };
