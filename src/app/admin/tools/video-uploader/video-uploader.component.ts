@@ -71,6 +71,7 @@ export class VideoUploaderComponent implements OnInit {
 
   async submit(): Promise<void> {
     try {
+      if (this.showFileLoader || this.showLoader) {return}
       const data = {
         url: this.fileLink,
         title: this.titleInput.nativeElement.value,
