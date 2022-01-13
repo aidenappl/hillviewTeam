@@ -26,7 +26,13 @@ const routes: Routes = [
         (m) => m.MobileRegisterModule
       ),
   },
-  { path: 'tools/assetCreator', loadChildren: () => import('./tools/asset-creator/asset-creator.module').then(m => m.AssetCreatorModule) },
+  {
+    path: 'tools/assetCreator',
+    loadChildren: () =>
+      import('./tools/asset-creator/asset-creator.module').then(
+        (m) => m.AssetCreatorModule
+      ),
+  },
 ];
 
 @NgModule({

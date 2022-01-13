@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { VideosRoutingModule } from './videos-routing.module';
 import { VideosComponent } from './videos.component';
+import { HeaderModule } from '../../components/header/header.module';
 
 
 @NgModule({
@@ -11,6 +12,7 @@ import { VideosComponent } from './videos.component';
   ],
   imports: [
     CommonModule,
+    HeaderModule,
     VideosRoutingModule
   ]
 })

@@ -28,7 +28,7 @@
                 <div class="asset" *ngFor="let asset of assets" [hidden]="!loaded">
                     <div class="object"><div class="avatar fullCenter reg-image" [ngStyle]="{'background-image': 'url('+asset.image_url+')'}"></div></div>
                     <div class="object"><p>{{asset.name}}</p></div>
-                    <div class="object"><p>{{asset.identifier}}</p></div>
+                    <div class="object"><p>Tag: {{asset.identifier}}</p></div>
                     <div class="object"><p>{{asset.category.name}}</p></div>
                     <div class="object"><p [class.bold]="asset.status.id === 2">{{asset.status.name}}</p></div>
                     <div class="object">
