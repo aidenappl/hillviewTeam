@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { LinksRoutingModule } from './links-routing.module';
 import { LinksComponent } from './links.component';
+import { HeaderModule } from '../../components/header/header.module';
 
 
 @NgModule({
@@ -11,6 +12,7 @@ import { LinksComponent } from './links.component';
   ],
   imports: [
     CommonModule,
+    HeaderModule,
     LinksRoutingModule
   ]
 })

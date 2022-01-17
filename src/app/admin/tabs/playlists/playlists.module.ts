@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { PlaylistsRoutingModule } from './playlists-routing.module';
 import { PlaylistsComponent } from './playlists.component';
+import { HeaderModule } from '../../components/header/header.module';
 
 
 @NgModule({
@@ -11,6 +12,7 @@ import { PlaylistsComponent } from './playlists.component';
   ],
   imports: [
     CommonModule,
+    HeaderModule,
     PlaylistsRoutingModule
   ]
 })
