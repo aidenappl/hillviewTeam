@@ -15,6 +15,7 @@
                 <div class="object"><p></p></div>
                 <div class="object"><p>Name</p></div>
                 <div class="object"><p>Asset</p></div>
+                <div class="object"><p>Tag</p></div>
                 <div class="object"><p>Time Out</p></div>
                 <div class="object"><p>Time In</p></div>
                 <div class="object"><p></p></div>
@@ -29,6 +30,7 @@
                     <div class="object"><div class="avatar fullCenter reg-image" [ngStyle]="{'background-image': 'url('+checkout.user.profile_image_url+')'}"></div></div>
                     <div class="object"><p>{{checkout.user.name}}</p></div>
                     <div class="object"><p>{{checkout.asset.name}}</p></div>
+                    <div class="object"><p>{{checkout.asset.identifier}}</p></div>
                     <div class="object"><p>{{checkout.display.time_out}}</p></div>
                     <div class="object"><p [class.bold]="checkout.checkout_status.id === 1">{{checkout.display.time_in}}</p></div>
                     <div class="object">
