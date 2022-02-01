@@ -16,10 +16,32 @@ export class CheckoutsComponent implements OnInit {
   ) { }
 
   checkouts: Checkout[] = [];
+  checkoutsSelfStore: Checkout[] = [];
   loaded: boolean = false;
+
+  showFilter: boolean = false;
+
+  filters: any = {
+    missing: false
+  }
 
   ngOnInit(): void {
     this.initialize();
+  }
+
+  toggleFilter(): void {
+    this.showFilter = !this.showFilter;
+  }
+
+  showMissingGear(): void {
+    this.filters.missing = true;
+    this.checkoutsSelfStore = this.checkouts
+    this.checkouts = this.checkouts.filter((checkout: Checkout) => {return checkout.checkout_status.id === 1})
+  }
+
+  showAllGear(): void {
+    this.filters.missing = false
+    this.checkouts = this.checkoutsSelfStore
   }
 
   async initialize(): Promise<void> {
