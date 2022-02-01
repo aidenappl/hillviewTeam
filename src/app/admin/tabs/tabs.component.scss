@@ -179,3 +179,18 @@
     width: calc(100% - 350px);
     height: 100%;
 }
+
+@media screen and (max-width: 1300px) {
+    .nav-container {
+        width: 250px !important;
+    }
+    .user-module {
+        display: none !important;
+    }
+    .options-block.settings {
+        display: none !important;
+    }
+    .body-outlet {
+        width: calc(100% - 250px) !important;
+    }
+}

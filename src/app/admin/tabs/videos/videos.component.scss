@@ -395,3 +395,15 @@
   top: 0px;
   display: flex;
 }
+
+
+@media screen and (max-width: 1300px) {
+  .object {
+      &:nth-child(4) {
+        display: none;
+      }
+      &:nth-child(3) {
+        width: calc(65% - 300px);
+      }
+    }
+}

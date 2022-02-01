@@ -207,3 +207,16 @@
         position: relative;
       }
 }
+
+@media screen and (max-width: 1300px) {
+    .object {
+        &:nth-child(7) {
+          display: none;
+        }
+      }
+    .object.mobile {
+      &:nth-child(6) {
+        display: none;
+      }
+    }
+}
