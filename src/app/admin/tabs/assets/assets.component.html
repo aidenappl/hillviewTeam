@@ -1,4 +1,36 @@
 <div class="page-wrapper">
+
+    <!-- Center Inspector -->
+    <div class="admin-center-inspect fullCenter" *ngIf="showAssetInspector">
+        <div class="section">
+            <div class="asset-image fullXCenter reg-image" [ngStyle]="{'background-image': 'url('+selectedAsset.image_url+')'}"></div>
+        </div>
+        <div class="section">
+            <div class="asset-info">
+                <div class="asset-info-title">{{selectedAsset.name}}</div>
+                <div class="asset-info-description">{{selectedAsset.description}}</div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="input-wrapper">
+                <p class="input-title">Name</p>
+                <input type="text" #nameInspectInput [value]="selectedAsset.name"/>
+            </div>
+            <div class="input-wrapper">
+                <p class="input-title">Description</p>
+                <textarea type="text" #descriptionInspectInput [value]="selectedAsset.description">  </textarea>
+            </div>
+            <div class="input-wrapper">
+                <p class="input-title" >Identifier</p>
+                <input type="text" #identifierInspectInput [value]="selectedAsset.identifier"/>
+            </div>
+            <div class="input-wrapper">
+                <input type="submit" value="Submit Changes" (click)="submitChanges()">
+            </div>
+        </div>
+    </div>
+
+    <!-- Page -->
     <div class="admin-container">
         <app-admin-header [title]="'Assets'"></app-admin-header>
         <div class="admin-primary-body">
@@ -36,7 +68,7 @@
                     <div class="object"><p [class.bold]="asset.status.id === 2">{{asset.status.name}}</p></div>
                     <div class="object">
                         <div class="central-inputs fullCenter">
-                            <button>Inspect</button>
+                            <button (click)="inspectAsset(asset.id)">Inspect</button>
                         </div>
                     </div>
                 </div>
