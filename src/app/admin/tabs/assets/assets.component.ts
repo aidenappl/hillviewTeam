@@ -71,14 +71,7 @@ export class AssetsComponent implements OnInit {
           }
           const response = await this.request.post(`${environment.CORE_API_URL}/admin/edit/asset`, data);
           console.log(response)
-          if (response.body) {
-            const body = response.body as Asset;
-            this.assets.forEach((asset: Asset) => {
-              if (asset.id === body.id) {
-                asset = body;
-              }
-            })
-          }
+          window.location.reload();
         } catch (error) {
           console.error(error)
         }
