@@ -12,14 +12,17 @@ import { RequestService } from 'src/services/http/request.service';
 export class AssetsComponent implements OnInit {
     constructor(private request: RequestService) {}
 
-    @ViewChild('nameInspectInput', {static: false}) nameInspectInput: any;
-    @ViewChild('identifierInspectInput', {static: false}) identifierInspectInput: any;
-    @ViewChild('descriptionInspectInput', {static: false}) descriptionInspectInput: any;
+    @ViewChild('nameInspectInput', { static: false }) nameInspectInput: any;
+    @ViewChild('identifierInspectInput', { static: false })
+    identifierInspectInput: any;
+    @ViewChild('descriptionInspectInput', { static: false })
+    descriptionInspectInput: any;
 
     assets: Asset[] = [];
     loaded: boolean = false;
     selectedAsset: Asset = {} as Asset;
     showAssetInspector: boolean = false;
+    showSplash: boolean = false;
 
     ngOnInit(): void {
         this.initialize();
@@ -59,21 +62,30 @@ export class AssetsComponent implements OnInit {
             return asset.id === id;
         }) as Asset;
         this.showAssetInspector = true;
+        this.showSplash = true;
+    }
+
+    splashClick(): void {
+        this.showSplash = false;
+        this.showAssetInspector = false;
     }
 
     async submitChanges(): Promise<void> {
         try {
-          const data = {
-            id: this.selectedAsset.id,
-            name: this.nameInspectInput.nativeElement.value,
-            identifier: this.identifierInspectInput.nativeElement.value,
-            description: this.descriptionInspectInput.nativeElement.value,
-          }
-          const response = await this.request.post(`${environment.CORE_API_URL}/admin/edit/asset`, data);
-          console.log(response)
-          window.location.reload();
+            const data = {
+                id: this.selectedAsset.id,
+                name: this.nameInspectInput.nativeElement.value,
+                identifier: this.identifierInspectInput.nativeElement.value,
+                description: this.descriptionInspectInput.nativeElement.value,
+            };
+            const response = await this.request.post(
+                `${environment.CORE_API_URL}/admin/edit/asset`,
+                data
+            );
+            console.log(response);
+            window.location.reload();
         } catch (error) {
-          console.error(error)
+            console.error(error);
         }
     }
 }
