@@ -19,20 +19,20 @@
         </div>
         <div class="section">
             <div class="input-wrapper">
-                <p class="input-title">Name</p>
-                <input type="text" #nameInspectInput [value]="selectedVideo.title"/>
+                <p class="input-title">Title</p>
+                <input type="text" #titleInput [value]="selectedVideo.title"/>
             </div>
             <div class="input-wrapper">
                 <p class="input-title">Description</p>
-                <textarea type="text" #descriptionInspectInput [value]="selectedVideo.description">  </textarea>
+                <textarea type="text" #descriptionInput [value]="selectedVideo.description">  </textarea>
             </div>
             <div class="input-wrapper">
                 <p class="input-title" >Source URL</p>
-                <input type="text" #identifierInspectInput [value]="selectedVideo.url"/>
+                <input type="text" #sourceInput [value]="selectedVideo.url"/>
             </div>
             <div class="input-wrapper">
                 <p class="input-title" >Thumbnail URL</p>
-                <input type="text" #identifierInspectInput [value]="selectedVideo.thumbnail"/>
+                <input type="text" #thumbnailInput [value]="selectedVideo.thumbnail"/>
             </div>
             <div class="input-wrapper">
                 <input type="submit" value="Submit Changes" (click)="submitChanges()">

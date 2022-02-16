@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import * as dayjs from 'dayjs';
 import { environment } from 'src/environments/environment';
 import { Video } from 'src/providers/video.interface';
@@ -11,6 +11,12 @@ import { RequestService } from 'src/services/http/request.service';
 })
 export class VideosComponent implements OnInit {
     constructor(private request: RequestService) {}
+
+    @ViewChild('titleInput', { static: false }) titleInput!: ElementRef;
+    @ViewChild('descriptionInput', { static: false }) descriptionInput!: ElementRef;
+    @ViewChild('thumbnailInput' , { static: false }) thumbnailInput!: ElementRef;
+    @ViewChild('sourceInput', { static: false }) sourceInput!: ElementRef;
+    
 
     videos: Video[] = [];
     loaded: boolean = false;
@@ -76,17 +82,18 @@ export class VideosComponent implements OnInit {
 
     async submitChanges(): Promise<void> {
         try {
-            // const data = {
-            //     id: this.selectedVideo.id,
-            //     name: this.selectedVideo.nativeElement.value,
-            //     identifier: this.selectedVideo.nativeElement.value,
-            //     description: this.descriptionInspectInput.nativeElement.value,
-            // };
-            // const response = await this.request.post(
-            //     `${environment.CORE_API_URL}/admin/edit/video`,
-            //     data
-            // );
-            // console.log(response);
+            const data = {
+                id: this.selectedVideo.id,
+                title: this.titleInput.nativeElement.value,
+                description: this.descriptionInput.nativeElement.value,
+                thumbnail: this.thumbnailInput.nativeElement.value,
+                url: this.sourceInput.nativeElement.value,
+            };
+            const response = await this.request.post(
+                `${environment.CORE_API_URL}/admin/edit/video`,
+                data
+            );
+            console.log(response);
             window.location.reload();
         } catch (error) {
             console.error(error);
