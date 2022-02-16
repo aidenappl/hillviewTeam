@@ -2,6 +2,7 @@ import { GeneralNSM } from "./user.interface";
 
 export interface VideoDisplays {
     inserted_at?: string;
+    full_inserted_at?: string;
 }
 
 export interface Video {

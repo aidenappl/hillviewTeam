@@ -16,6 +16,7 @@ export class VideosComponent implements OnInit {
     @ViewChild('descriptionInput', { static: false }) descriptionInput!: ElementRef;
     @ViewChild('thumbnailInput' , { static: false }) thumbnailInput!: ElementRef;
     @ViewChild('sourceInput', { static: false }) sourceInput!: ElementRef;
+    @ViewChild('thumbnailUploader', { static: false }) thumbnailUploader!: ElementRef;
     
 
     videos: Video[] = [];
@@ -38,6 +39,25 @@ export class VideosComponent implements OnInit {
         }
     }
 
+    async deleteVideo(id: number): Promise<void> {
+        try {
+            const response = await this.request.post(
+                `${environment.CORE_API_URL}/admin/delete/video`,
+                {
+                    id,
+                }
+            );
+            console.log(response);
+            window.location.reload();
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    handleThumbnailUpload(): void {
+      this.thumbnailUploader.nativeElement.click()
+    }
+
     async formatVideos(): Promise<void> {
         try {
             this.videos.forEach((video: Video) => {
@@ -45,6 +65,9 @@ export class VideosComponent implements OnInit {
                     inserted_at: dayjs(video.inserted_at).format(
                         'MMMM DD, YYYY'
                     ),
+                    full_inserted_at: dayjs(video.inserted_at).format(
+                      'HH:MM A - MMMM DD, YYYY'
+                  ),
                 };
             });
         } catch (error) {
