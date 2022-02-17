@@ -17,9 +17,11 @@ export class VideosComponent implements OnInit {
     @ViewChild('thumbnailInput' , { static: false }) thumbnailInput!: ElementRef;
     @ViewChild('sourceInput', { static: false }) sourceInput!: ElementRef;
     @ViewChild('thumbnailUploader', { static: false }) thumbnailUploader!: ElementRef;
+    @ViewChild('statusInput' , { static: false }) statusInput!: ElementRef;
     
 
     videos: Video[] = [];
+    videoStatuses: string[] = ["Public", "Draft", "Unlisted", "Archived"]
     loaded: boolean = false;
     selectedVideo: Video = {} as Video;
     showVideoInspector: boolean = false;
@@ -103,21 +105,30 @@ export class VideosComponent implements OnInit {
         this.showVideoInspector = false;
     }
 
+    GetStatValue(): number {
+      let val = this.statusInput.nativeElement.value
+      let loc = this.videoStatuses.indexOf(val)
+      return loc = 1
+    }
+
     async submitChanges(): Promise<void> {
         try {
+          let stat = this.GetStatValue()
+          console.log(stat)
             const data = {
                 id: this.selectedVideo.id,
                 title: this.titleInput.nativeElement.value,
                 description: this.descriptionInput.nativeElement.value,
                 thumbnail: this.thumbnailInput.nativeElement.value,
                 url: this.sourceInput.nativeElement.value,
+                status: stat
             };
             const response = await this.request.post(
                 `${environment.CORE_API_URL}/admin/edit/video`,
                 data
             );
             console.log(response);
-            window.location.reload();
+            // window.location.reload();
         } catch (error) {
             console.error(error);
         }

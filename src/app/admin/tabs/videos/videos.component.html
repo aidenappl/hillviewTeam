@@ -27,6 +27,12 @@
                 <textarea type="text" #descriptionInput [value]="selectedVideo.description">  </textarea>
             </div>
             <div class="input-wrapper">
+                <p class="input-title">Status</p>
+                <select #statusInput [value]="selectedVideo.status.name">
+                    <option *ngFor="let stat of videoStatuses" [selected]="stat === selectedVideo.status.name">{{stat}}</option>
+                </select>
+            </div>
+            <div class="input-wrapper">
                 <p class="input-title" >Source URL</p>
                 <input type="text" #sourceInput [value]="selectedVideo.url"/>
             </div>
