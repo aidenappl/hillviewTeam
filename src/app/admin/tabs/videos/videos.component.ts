@@ -108,7 +108,7 @@ export class VideosComponent implements OnInit {
     GetStatValue(): number {
       let val = this.statusInput.nativeElement.value
       let loc = this.videoStatuses.indexOf(val)
-      return loc = 1
+      return loc + 1
     }
 
     async submitChanges(): Promise<void> {
@@ -128,7 +128,7 @@ export class VideosComponent implements OnInit {
                 data
             );
             console.log(response);
-            // window.location.reload();
+            window.location.reload();
         } catch (error) {
             console.error(error);
         }
