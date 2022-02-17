@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { RequestService } from 'src/services/http/request.service';
 
+import * as captureVideoFrame from "capture-video-frame";
+
 @Component({
   selector: 'app-video-uploader',
   templateUrl: './video-uploader.component.html',
@@ -101,5 +103,50 @@ export class VideoUploaderComponent implements OnInit {
     this.showFileLoader = true;
     this.uploadVideoInput.nativeElement.click();
   }
+
+  getVideoFrame(): void {
+    try {
+      const frame = this.captureVideoFrame("preview-video", "jpeg", 0.92);
+      console.log(frame)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  captureVideoFrame(video: any, format: any, quality: any) {
+    if (typeof video === 'string') {
+        video = document.getElementById(video);
+    }
+
+    format = format || 'jpeg';
+    quality = quality || 0.92;
+
+    if (!video || (format !== 'png' && format !== 'jpeg')) {
+      console
+        return false;
+    }
+
+    var canvas: any = document.createElement("CANVAS");
+
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    canvas.getContext('2d').drawImage(video, 0, 0);
+
+    var dataUri = canvas.toDataURL('image/' + format, quality);
+    var data = dataUri.split(',')[1];
+    var mimeType = dataUri.split(';')[0].slice(5)
+
+    var bytes = window.atob(data);
+    var buf = new ArrayBuffer(bytes.length);
+    var arr = new Uint8Array(buf);
+
+    for (var i = 0; i < bytes.length; i++) {
+        arr[i] = bytes.charCodeAt(i);
+    }
+
+    var blob = new Blob([ arr ], { type: mimeType });
+    return { blob: blob, dataUri: dataUri, format: format };
+};
 
 }

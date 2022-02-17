@@ -17,6 +17,11 @@
                 <p>Video Description</p>
                 <textarea type="text" placeholder="Enter a video description" #descriptionInput></textarea>
             </div>
+            <div class="video-preview-wrapper" (click)="getVideoFrame()">
+                <video id="preview-video" autoplay controls>
+                    <source src="https://content.hillview.tv/videos/uploads/UID12-1645036525-FWEHKHJAXL.mp4" type="video/mp4" />
+                </video>
+            </div>
             <div class="input-wrapper">
                 <div class="loader" *ngIf="showLoader" [style.top]="'18px'"></div>
                 <input type="submit" value="{{videoSubmitButtonVal}}" (click)="submit()">

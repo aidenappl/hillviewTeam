@@ -3,3 +3,12 @@
     padding-top: 100px;
     padding-bottom: 100px;
 }
+
+.video-preview-wrapper {
+    width: 100%;
+    padding: 10px;
+    background: black;
+    video {
+        width: 100%;
+    }
+}
