@@ -67,6 +67,7 @@
             <div class="appender-header">
                 <div class="object"><p></p></div>
                 <div class="object"><p>Title</p></div>
+                <div class="object"><p>Status</p></div>
                 <div class="object"><p>Upload Date</p></div>
                 <div class="object"><p></p></div>
                 <div class="hr"></div>
@@ -84,6 +85,7 @@
                         </div>
                     </div>
                     <div class="object"><p>{{video.title}}</p></div>
+                    <div class="object"><a class="stat" [ngClass]="video.status.short_name">{{video.status.name}}</a></div>
                     <div class="object"><p>{{video.display.inserted_at}}</p></div>
                     <div class="object">
                         <div class="central-inputs fullCenter">
