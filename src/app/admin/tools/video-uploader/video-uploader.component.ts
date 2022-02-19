@@ -34,6 +34,7 @@ export class VideoUploaderComponent implements OnInit {
         localBlob: '',
         uploadedFileName: '',
         progress: 0,
+        bkgImg: '',
     };
 
     bools: any = {
@@ -136,21 +137,21 @@ export class VideoUploaderComponent implements OnInit {
     }
 
     async getFileURL(file: any): Promise<any> {
-      try {
-        return URL.createObjectURL(file)
-      } catch (error) {
-        throw error
-      }
+        try {
+            return URL.createObjectURL(file);
+        } catch (error) {
+            throw error;
+        }
     }
 
     getBase64(file: any): Promise<any> {
-      const reader = new FileReader()
-      return new Promise(resolve => {
-        reader.onload = (ev: any) => {
-          resolve(ev.target.result)
-        }
-        reader.readAsDataURL(file)
-      })
+        const reader = new FileReader();
+        return new Promise((resolve) => {
+            reader.onload = (ev: any) => {
+                resolve(ev.target.result);
+            };
+            reader.readAsDataURL(file);
+        });
     }
 
     async submit(): Promise<void> {
@@ -189,6 +190,16 @@ export class VideoUploaderComponent implements OnInit {
             return;
         }
         this.uploadVideoInput.nativeElement.click();
+    }
+
+    async getBkgFrame(): Promise<void> {
+        try {
+            const frame: any = captureVideoFrame('preview-video', 'jpeg', 0.5);
+            let bl = await this.getBase64(frame.blob)
+            this.data.bkgImg = bl
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     async getVideoFrame(): Promise<void> {

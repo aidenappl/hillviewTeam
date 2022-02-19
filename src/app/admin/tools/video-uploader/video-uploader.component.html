@@ -65,8 +65,12 @@
                     <div class="action-btns">
                         <button (click)="toggleThumbnailer(true)" *ngIf="bools.hasUpload">Select Thumbnail</button>
                     </div>
-                    <h1>{{data.title.length > 0 ? data.title : "Enter a Title..."}}</h1>
+                    <h1 (click)="getBkgFrame()">{{data.title.length > 0 ? data.title : "Enter a Title..."}}</h1>
                     <p>{{data.description.length > 0 ? data.description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit..."}}</p>
+                </div>
+                <div class="glass"></div>
+                <div class="bk">
+                    <img [src]="data.bkgImg">
                 </div>
             </div>
         </div>

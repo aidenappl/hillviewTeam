@@ -28,7 +28,7 @@
     border-radius: 30px;
     background: white;
     z-index: 10;
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
     .progress-bar {
         width: 100%;
         height: 50px;
@@ -73,14 +73,15 @@
         .video-previewer {
             width: 100%;
             height: 100%;
-            background-color: #e2f1fc;
             border-radius: 60px;
+            overflow: hidden;
             padding: 30px;
             .video-container {
                 width: 100%;
                 height: 65%;
                 border-radius: 40px;
                 overflow: hidden;
+                z-index: 3;
                 video {
                     width: 100%;
                     height: 100%;
@@ -105,10 +106,41 @@
                     }
                 }
             }
+            .glass {
+                box-shadow: 0 0 1rem 0 rgb(0 0 0 / 20%);
+                border-radius: 5px;
+                background-color: rgba(255, 255, 255, 0.15);
+                -webkit-backdrop-filter: blur(5px);
+                backdrop-filter: blur(150px);
+                position: absolute;
+                top: 0px;
+                width: 100%;
+                height: 100%;
+                z-index: 2;
+                left: 0px;
+            }
+            .bk {
+                width: 100%;
+                height: 100%;
+                background-color: #e2f1fc;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                z-index: 1;
+                opacity: 0.5;
+                img {
+                    height: 100%;
+                    transition: 1s; 
+                    transform: translateX(-50%);
+                    left: 50%;
+                    position: absolute;
+                }
+            }
             .action-btns {
                 width: fit-content;
                 height: fit-content;
                 position: absolute;
+                z-index: 3;
                 right: -25%;
                 top: 0px;
                 button {
@@ -118,7 +150,7 @@
                     /* white-space: pre; */
                     width: 160px;
                     height: 40px;
-                    transition: .2s;
+                    transition: 0.2s;
                     margin-top: 40px;
                     cursor: pointer;
                     &:hover {
@@ -131,6 +163,7 @@
                 width: 80%;
                 height: 35%;
                 padding: 40px 0px;
+                z-index: 3;
                 h1 {
                     font-size: 3rem;
                 }
@@ -173,7 +206,6 @@
     }
 }
 
-
 .center-form {
     width: 600px;
     padding-top: 100px;
@@ -187,7 +219,7 @@
     border-radius: 10px;
     z-index: 10;
     opacity: 0;
-    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.5);
     pointer-events: none;
     video {
         width: 100%;
