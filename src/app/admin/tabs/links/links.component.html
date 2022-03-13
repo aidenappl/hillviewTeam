@@ -1,3 +1,25 @@
+<div class="create-modal fullCenter" [class.active]="bools.showLinkCreator">
+    <div class="close" (click)="toggleCreateLinkModal(false)">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+    </div>
+    <h1>New Link</h1>
+    <div class="input-wrapper">
+        <p>Route</p>
+        <input type="text" #link placeholder="What route?">
+    </div>
+    <div class="input-wrapper">
+        <p>Destination</p>
+        <input type="text" #destination placeholder="Where do you want it to go?">
+    </div>
+    <div class="input-wrapper hasLoader">
+        <div class="loader" style="top: 19px;" [hidden]="!bools.creatingLink"></div>
+        <input type="submit" [value]="bools.creatingLink ? '' : 'Create'" (click)="createLink()">
+    </div>
+</div>
+<div class="fs-splash" [class.active]="bools.showSplash"></div>
+
 <div class="page-wrapper">
     <div class="admin-container">
         <app-admin-header [title]="'Link Management'"></app-admin-header>
@@ -8,38 +30,37 @@
                     <div class="filter-action fullYCenter">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
                     </div>
+                    <button class="actionButton fullYCenter" (click)="toggleCreateLinkModal(true)">
+                        Create Link
+                    </button>
                 </div>
             </div>
             <!-- Header -->
-            <!-- <div class="appender-header">
+            <div class="appender-header">
                 <div class="object"><p></p></div>
-                <div class="object"><p>Title</p></div>
-                <div class="object"><p>Upload Date</p></div>
+                <div class="object"><p>Route</p></div>
+                <div class="object"><p>Destination</p></div>
+                <div class="object"><p>Creator</p></div>
+                <div class="object"><p>Created At</p></div>
                 <div class="object"><p></p></div>
                 <div class="hr"></div>
             </div>
-            <div class="loading-wrapper fullXCenter" *ngIf="!loaded">
+            <div class="loading-wrapper fullXCenter" *ngIf="!bools.loaded">
                 <div class="loader blk"></div>
-            </div> -->
+            </div>
             <!-- Appender -->
-            <!-- <div class="videos-appender" *ngIf="loaded">
-                <div class="video" *ngFor="let video of videos" [hidden]="!loaded">
+            <div class="links-appender" *ngIf="bools.loaded">
+                <div class="link" *ngFor="let link of links" [hidden]="!bools.loaded">
+                    <div class="object"><p></p></div>
+                    <div class="object"><p>{{link.route}}</p></div>
+                    <div class="object"><a [href]="link.destination">{{link.destination}}</a></div>
+                    <div class="object"><p>{{link.creator.name}}</p></div>
+                    <div class="object"><p>{{link.display!.inserted_at}}</p></div>
                     <div class="object">
-                        <div (click)="openVideo(video.id)" class="thumbnail fullCenter reg-image" [ngStyle]="{'background-image': 'url('+video.thumbnail}">
-                            <div></div>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-play fullCenter"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                        </div>
-                    </div>
-                    <div class="object"><p>{{video.title}}</p></div>
-                    <div class="object"><p>{{video.display.inserted_at}}</p></div>
-                    <div class="object">
-                        <div class="central-inputs fullCenter">
-                            <button>Inspect</button>
-                            <button (click)="openVideo(video.id)">Watch</button>
-                        </div>
+                        <button class="fullYCenter">Actions</button>
                     </div>
                 </div>
-            </div> -->
+            </div>
         </div>
     </div>
 </div>
