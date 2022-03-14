@@ -33,10 +33,16 @@ export class CheckoutsComponent implements OnInit {
     this.showFilter = !this.showFilter;
   }
 
-  showMissingGear(): void {
-    this.filters.missing = true;
-    this.checkoutsSelfStore = this.checkouts
-    this.checkouts = this.checkouts.filter((checkout: Checkout) => {return checkout.checkout_status.id === 1})
+  async showMissingGear(): Promise<void> {
+    try {
+      this.filters.missing = true;
+      this.checkoutsSelfStore = this.checkouts
+      let checkouts = await this.getOpenCheckouts();
+      checkouts = await this.formatCheckouts(checkouts);
+      this.checkouts = checkouts
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   showAllGear(): void {
@@ -46,23 +52,25 @@ export class CheckoutsComponent implements OnInit {
 
   async initialize(): Promise<void> {
     try {
-      this.checkouts = await this.getCheckouts();
-      await this.formatCheckouts();
+      let checkouts = await this.getCheckouts();
+      checkouts = await this.formatCheckouts(checkouts);
+      this.checkouts = checkouts
       this.loaded = true;
     } catch (error) {
       console.error(error);
     }
   }
 
-  async formatCheckouts(): Promise<void> {
+  async formatCheckouts(checkouts: Checkout[]): Promise<Checkout[]> {
     try {
-      this.checkouts.forEach((checkout: Checkout) => {
+      checkouts.forEach((checkout: Checkout) => {
         console.log(checkout)
         checkout.display = {
           time_out: dayjs(checkout.time_out).format("MM/DD/YY hh:mm A"),
         time_in: checkout.time_in ? dayjs(checkout.time_in).format("MM/DD/YY hh:mm A") : (checkout.expected_in ? `Expected : ${dayjs(checkout.expected_in).format("MM/DD/YY")}` : 'Not Returned')
         }
       });
+      return checkouts;
     } catch (error) {
       throw error
     }
@@ -70,7 +78,16 @@ export class CheckoutsComponent implements OnInit {
 
   async getCheckouts(): Promise<Checkout[]> {
     try {
-      const response = await this.request.get(`${environment.CORE_API_URL}/admin/list/checkouts/25`)
+      const response = await this.request.get(`${environment.CORE_API_URL}/admin/list/checkouts?limit=50`)
+      return (response.body as Checkout[]);
+    } catch (error) {
+      throw error
+    }
+  }
+
+  async getOpenCheckouts(): Promise<Checkout[]> {
+    try {
+      const response = await this.request.get(`${environment.CORE_API_URL}/admin/list/openCheckouts?limit=50`)
       return (response.body as Checkout[]);
     } catch (error) {
       throw error
