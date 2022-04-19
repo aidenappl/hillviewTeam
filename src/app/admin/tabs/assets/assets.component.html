@@ -2,6 +2,9 @@
 
     <!-- Center Inspector -->
     <div class="admin-center-inspect fullCenter" *ngIf="showAssetInspector">
+        <div class="alt-btn">
+            <button (click)="openNotes(selectedAsset)">Notes</button>
+        </div>
         <div class="close" (click)="splashClick()">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </div>
@@ -26,6 +29,17 @@
             <div class="input-wrapper">
                 <p class="input-title" >Identifier</p>
                 <input type="text" #identifierInspectInput [value]="selectedAsset.identifier"/>
+            </div>
+            <div class="input-wrapper">
+                <p class="input-title" >Status </p>
+                <select type="text" #selectStatus [value]="selectedAsset.status.id">
+                    <option value="1">Ready for Sale</option>
+                    <option value="2">In-Service</option>
+                    <option value="3">Pending Repair</option>
+                    <option value="4">Broken</option>
+                    <option value="5">Lost</option>
+                    <option value="6">Warning</option>
+                </select>
             </div>
             <div class="input-wrapper">
                 <input type="submit" value="Submit Changes" (click)="submitChanges()">

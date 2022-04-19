@@ -13,10 +13,9 @@ export class AssetsComponent implements OnInit {
     constructor(private request: RequestService) {}
 
     @ViewChild('nameInspectInput', { static: false }) nameInspectInput: any;
-    @ViewChild('identifierInspectInput', { static: false })
-    identifierInspectInput: any;
-    @ViewChild('descriptionInspectInput', { static: false })
-    descriptionInspectInput: any;
+    @ViewChild('identifierInspectInput', { static: false }) identifierInspectInput: any;
+    @ViewChild('descriptionInspectInput', { static: false }) descriptionInspectInput: any;
+    @ViewChild('selectStatus', { static: false }) selectStatus: any;
 
     assets: Asset[] = [];
     loaded: boolean = false;
@@ -40,7 +39,7 @@ export class AssetsComponent implements OnInit {
 
     async formatAssets(): Promise<void> {
         try {
-            this.assets.forEach((asset: Asset) => {});
+            this.assets.sort((a, b) => a.name.localeCompare(b.name))
         } catch (error) {
             throw error;
         }
@@ -61,6 +60,7 @@ export class AssetsComponent implements OnInit {
         this.selectedAsset = this.assets.find((asset: Asset) => {
             return asset.id === id;
         }) as Asset;
+        console.log(this.selectedAsset);
         this.showAssetInspector = true;
         this.showSplash = true;
     }
@@ -70,6 +70,33 @@ export class AssetsComponent implements OnInit {
         this.showAssetInspector = false;
     }
 
+    openNotes(asset: Asset): void {
+        let response = window.prompt('Asset Notes:', asset.metadata.notes)
+        if (response) {
+            if (response != asset.metadata.notes) {
+                // Changes made
+                this.updateNotes(asset, response);
+            }
+        }
+    }
+
+    async updateNotes(asset: Asset, note: String): Promise<void> {
+        try {
+            const data = {
+                id: asset.id,
+                notes: note,
+            };
+            const response = await this.request.post(
+                `${environment.CORE_API_URL}/admin/edit/asset`,
+                data
+            );
+            console.log(response);
+            window.location.reload();
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     async submitChanges(): Promise<void> {
         try {
             const data = {
@@ -77,6 +104,7 @@ export class AssetsComponent implements OnInit {
                 name: this.nameInspectInput.nativeElement.value,
                 identifier: this.identifierInspectInput.nativeElement.value,
                 description: this.descriptionInspectInput.nativeElement.value,
+                status: parseInt(this.selectStatus.nativeElement.value),
             };
             const response = await this.request.post(
                 `${environment.CORE_API_URL}/admin/edit/asset`,
