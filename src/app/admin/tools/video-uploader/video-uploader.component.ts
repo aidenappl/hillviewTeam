@@ -84,6 +84,8 @@ export class VideoUploaderComponent implements OnInit {
                 return;
             }
 
+            this.titleInput.nativeElement.value = filename;
+
             console.log(files, filename, extension);
 
             this.data.uploadedFileName = 'Uploading... ' + filename;
