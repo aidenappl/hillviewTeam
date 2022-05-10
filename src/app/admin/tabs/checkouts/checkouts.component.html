@@ -31,7 +31,7 @@
             <!-- System Accounts -->
             <div class="checkouts-appender" *ngIf="loaded">
                 <div class="checkout" *ngFor="let checkout of checkouts" [hidden]="!loaded">
-                    <div class="object"><div class="avatar fullCenter reg-image" [ngStyle]="{'background-image': 'url('+checkout.user.profile_image_url+')'}"></div></div>
+                    <div class="object"><div class="avatar fullCenter reg-image" [ngStyle]="{'background-size': 'cover', 'background-image': 'url('+checkout.user.profile_image_url+')'}"></div></div>
                     <div class="object"><p>{{checkout.user.name}}</p></div>
                     <div class="object"><p>{{checkout.asset.name}}</p></div>
                     <div class="object"><p>{{checkout.asset.identifier}}</p></div>
