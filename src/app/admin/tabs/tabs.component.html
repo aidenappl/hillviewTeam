@@ -3,25 +3,6 @@
         <div class="icon"></div>
         <div class="options-container">
             <div class="options-block">
-                <h4>General</h4>
-                <div class="option" [class.active]="selectedTab === 'home'" (click)="tabPress('home')">
-                    <div class="option-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-                    </div>
-                    <p>Dashboard</p>
-                    <a [routerLink]="'/admin/r/home'"></a>
-                    <div class="vlHov"></div>
-                </div>
-                <div class="option" [class.active]="selectedTab === 'performance'" (click)="tabPress('performance')">
-                    <div class="option-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-divide-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="8" y1="12" x2="16" y2="12"></line><line x1="12" y1="16" x2="12" y2="16"></line><line x1="12" y1="8" x2="12" y2="8"></line></svg>
-                    </div>
-                    <p>Performance</p>
-                    <a [routerLink]="'/admin/r/performance'"></a>
-                    <div class="vlHov"></div>
-                </div>
-            </div>
-            <div class="options-block spacer">
                 <h4>Content</h4>
                 <div class="option" [class.active]="selectedTab === 'assets'" (click)="tabPress('assets')">
                     <div class="option-icon">
