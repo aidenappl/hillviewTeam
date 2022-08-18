@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { RequestService } from 'src/services/http/request.service';
 
@@ -37,22 +38,22 @@ export class PlaylistsComponent implements OnInit {
     loaded: boolean = false;
     playlists: Playlist[] = [];
 
-    constructor(private request: RequestService) {}
+    constructor(private request: RequestService, private router: Router) {}
 
     ngOnInit(): void {
         this.initialize();
     }
 
     async getPlaylists(): Promise<Playlist[]> {
-      try {
-          const response = await this.request.get(
-              `${environment.CORE_API_URL}/admin/list/playlists?limit=25&offset=0`
-          );
-          return response.body as Playlist[];
-      } catch (error) {
-          throw error;
-      }
-  }
+        try {
+            const response = await this.request.get(
+                `${environment.CORE_API_URL}/admin/list/playlists?limit=25&offset=0`
+            );
+            return response.body as Playlist[];
+        } catch (error) {
+            throw error;
+        }
+    }
 
     async initialize(): Promise<void> {
         try {
@@ -61,5 +62,9 @@ export class PlaylistsComponent implements OnInit {
         } catch (error) {
             console.error(error);
         }
+    }
+
+    openPlaylist(playlist: Playlist): void {
+        window.location.href = `https://hillview.tv/playlist/${playlist.route}`;
     }
 }
