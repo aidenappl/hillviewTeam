@@ -1,6 +1,6 @@
 <div class="page-wrapper">
     <div class="admin-container">
-        <app-admin-header [title]="'Video Playlists'"></app-admin-header>
+        <app-admin-header [title]="'playlist Playlists'"></app-admin-header>
         <div class="admin-primary-body">
             <div class="data-header">
                 <h2 class="fullYCenter">Playlist Management</h2>
@@ -11,35 +11,34 @@
                 </div>
             </div>
             <!-- Header -->
-            <!-- <div class="appender-header">
+            <div class="appender-header">
                 <div class="object"><p></p></div>
                 <div class="object"><p>Title</p></div>
-                <div class="object"><p>Upload Date</p></div>
+                <div class="object"><p>Total Videos</p></div>
                 <div class="object"><p></p></div>
                 <div class="hr"></div>
             </div>
             <div class="loading-wrapper fullXCenter" *ngIf="!loaded">
                 <div class="loader blk"></div>
-            </div> -->
+            </div>
             <!-- Appender -->
-            <!-- <div class="videos-appender" *ngIf="loaded">
-                <div class="video" *ngFor="let video of videos" [hidden]="!loaded">
+            <div class="playlists-appender" *ngIf="loaded">
+                <div class="playlist" *ngFor="let playlist of playlists" [hidden]="!loaded">
                     <div class="object">
-                        <div (click)="openVideo(video.id)" class="thumbnail fullCenter reg-image" [ngStyle]="{'background-image': 'url('+video.thumbnail}">
+                        <div class="thumbnail fullCenter reg-image" [ngStyle]="{'background-image': 'url('+playlist.banner_image}">
                             <div></div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-play fullCenter"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                         </div>
                     </div>
-                    <div class="object"><p>{{video.title}}</p></div>
-                    <div class="object"><p>{{video.display.inserted_at}}</p></div>
+                    <div class="object"><p>{{playlist.name}}</p></div>
+                    <div class="object"><p>{{playlist.videos.length}} Videos</p></div>
                     <div class="object">
                         <div class="central-inputs fullCenter">
                             <button>Inspect</button>
-                            <button (click)="openVideo(video.id)">Watch</button>
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div>
         </div>
     </div>
 </div>
