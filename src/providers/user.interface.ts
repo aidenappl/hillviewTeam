@@ -26,6 +26,7 @@ export interface MobileUser {
     id: number;
     name: string;
     email: string;
+    status: GeneralNSM;
     identifier: string;
     profile_image_url: string;
     inserted_at: Date;

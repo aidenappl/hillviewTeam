@@ -1,25 +1,116 @@
 <div class="page-wrapper">
+    <!-- User Popup -->
+    <div class="popup-container fullCenter" *ngIf="showUserPopup && selectedUser">
+        <div class="header">
+            <h2>Edit User</h2>
+            <div class="close" (click)="toggleUserPopup(false)">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                    <path
+                        d="M312.1 375c9.369 9.369 9.369 24.57 0 33.94s-24.57 9.369-33.94 0L160 289.9l-119 119c-9.369 9.369-24.57 9.369-33.94 0s-9.369-24.57 0-33.94L126.1 256L7.027 136.1c-9.369-9.369-9.369-24.57 0-33.94s24.57-9.369 33.94 0L160 222.1l119-119c9.369-9.369 24.57-9.369 33.94 0s9.369 24.57 0 33.94L193.9 256L312.1 375z"
+                    />
+                </svg>
+            </div>
+        </div>
+        <div class="inputs-section">
+            <div class="input-wrapper">
+                <p class="input-title">Name</p>
+                <input type="text" #nameInspectInput [value]="selectedUser.name"/>
+            </div>
+            <div class="input-wrapper">
+                <p class="input-title">Email</p>
+                <input type="text" #emailInspectInput [value]="selectedUser.email"/>
+            </div>
+            <div class="input-wrapper">
+                <p class="input-title">StudentID</p>
+                <input type="text" #identifierInspectInput [value]="selectedUser.identifier"/>
+            </div>
+            <div class="input-wrapper">
+                <p class="input-title" >Status </p>
+                <select type="text" #selectStatus [value]="selectedUser.status.id">
+                    <option value="1" *ngIf="let status in "></option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <!-- Admin Container -->
     <div class="admin-container">
         <app-admin-header [title]="'System Users'"></app-admin-header>
         <div class="admin-primary-body">
             <div class="data-header">
-                <h2 class="fullYCenter">{{selectedDatabase === 'system' ? 'Dashboard' : 'Mobile'}} Accounts</h2>
+                <h2 class="fullYCenter">
+                    {{
+                        selectedDatabase === "system" ? "Dashboard" : "Mobile"
+                    }}
+                    Accounts
+                </h2>
                 <div class="right-container">
                     <div class="source-object fullYCenter">
-                        <p>Source: <b>{{selectedDatabase === 'system' ? 'Dashboard' : 'Mobile'}}</b></p>
-                        <div class="arr"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
-                        <select (change)="changedDataSource($event)" [value]="selectedDatabase">
-                            <option id="system" value="system">Dashboard Accounts</option>
-                            <option id="mobile" value="mobile">Mobile Accounts</option>
+                        <p>
+                            Source:
+                            <b>{{
+                                selectedDatabase === "system"
+                                    ? "Dashboard"
+                                    : "Mobile"
+                            }}</b>
+                        </p>
+                        <div class="arr">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-chevron-down"
+                            >
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <select
+                            (change)="changedDataSource($event)"
+                            [value]="selectedDatabase"
+                        >
+                            <option id="system" value="system">
+                                Dashboard Accounts
+                            </option>
+                            <option id="mobile" value="mobile">
+                                Mobile Accounts
+                            </option>
                         </select>
                     </div>
                     <div class="filter-action fullYCenter">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="feather feather-filter"
+                        >
+                            <polygon
+                                points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"
+                            ></polygon>
+                        </svg>
                     </div>
-                    <button class="actionButton fullYCenter" *ngIf="selectedDatabase === 'mobile'" routerLink="/admin/tools/mobileRegister">
+                    <button
+                        class="actionButton fullYCenter"
+                        *ngIf="selectedDatabase === 'mobile'"
+                        routerLink="/admin/tools/mobileRegister"
+                    >
                         New Mobile User
                     </button>
-                    <button class="actionButton fullYCenter" *ngIf="selectedDatabase === 'system'" routerLink="/admin/tools/mobileRegister">
+                    <button
+                        class="actionButton fullYCenter"
+                        *ngIf="selectedDatabase === 'system'"
+                        routerLink="/admin/tools/mobileRegister"
+                    >
                         New System User
                     </button>
                 </div>
@@ -49,14 +140,48 @@
                 <div class="loader blk"></div>
             </div>
             <!-- System Accounts -->
-            <div class="users-appender" *ngIf="loaded && selectedDatabase === 'system'">
-                <div class="user" *ngFor="let user of listData.system" [hidden]="!loaded">
-                    <div class="object"><div class="avatar fullCenter reg-image" [ngStyle]="{'background-image': 'url('+user.profile_image_url}"></div></div>
-                    <div class="object"><p>{{user.name}}</p></div>
-                    <div class="object"><p *ngIf="user.username">@{{user.username}}</p><a (click)="claimUsername(user);" *ngIf="!user.username">Claim</a></div>
-                    <div class="object"><p>{{user.email}}</p></div>
-                    <div class="object"><p>{{user.display ? user.display.last_active : "Pending"}}</p></div>
-                    <div class="object"><p>{{user.authentication.name}}</p></div>
+            <div
+                class="users-appender"
+                *ngIf="loaded && selectedDatabase === 'system'"
+            >
+                <div
+                    class="user"
+                    *ngFor="let user of listData.system"
+                    [hidden]="!loaded"
+                >
+                    <div class="object">
+                        <div
+                            class="avatar fullCenter reg-image"
+                            [ngStyle]="{
+                                'background-image':
+                                    'url(' + user.profile_image_url
+                            }"
+                        ></div>
+                    </div>
+                    <div class="object">
+                        <p>{{ user.name }}</p>
+                    </div>
+                    <div class="object">
+                        <p *ngIf="user.username">@{{ user.username }}</p>
+                        <a (click)="claimUsername(user)" *ngIf="!user.username"
+                            >Claim</a
+                        >
+                    </div>
+                    <div class="object">
+                        <p>{{ user.email }}</p>
+                    </div>
+                    <div class="object">
+                        <p>
+                            {{
+                                user.display
+                                    ? user.display.last_active
+                                    : "Pending"
+                            }}
+                        </p>
+                    </div>
+                    <div class="object">
+                        <p>{{ user.authentication.name }}</p>
+                    </div>
                     <div class="object">
                         <div class="central-inputs fullCenter">
                             <button>Inspect</button>
@@ -65,15 +190,36 @@
                 </div>
             </div>
             <!-- Mobile Accounts -->
-            <div class="users-appender" *ngIf="loaded && selectedDatabase === 'mobile'">
-                <div class="user" *ngFor="let user of listData.mobile" [hidden]="!loaded">
-                    <div class="object mobile"><div class="avatar fullCenter reg-image" [ngStyle]="{'background-image': 'url('+user.profile_image_url}"></div></div>
-                    <div class="object mobile"><p>{{user.name}}</p></div>
-                    <div class="object mobile"><p>{{user.identifier}}</p></div>
-                    <div class="object mobile"><p>{{user.email}}</p></div>
+            <div
+                class="users-appender"
+                *ngIf="loaded && selectedDatabase === 'mobile'"
+            >
+                <div
+                    class="user"
+                    *ngFor="let user of listData.mobile"
+                    [hidden]="!loaded"
+                >
+                    <div class="object mobile">
+                        <div
+                            class="avatar fullCenter reg-image"
+                            [ngStyle]="{
+                                'background-image':
+                                    'url(' + user.profile_image_url
+                            }"
+                        ></div>
+                    </div>
+                    <div class="object mobile">
+                        <p>{{ user.name }}</p>
+                    </div>
+                    <div class="object mobile">
+                        <p>{{ user.identifier }}</p>
+                    </div>
+                    <div class="object mobile">
+                        <p>{{ user.email }}</p>
+                    </div>
                     <div class="object mobile"><p>Pending</p></div>
                     <div class="object mobile">
-                        <div class="central-inputs fullCenter">
+                        <div class="central-inputs fullCenter" (click)="openUserPop(user)">
                             <button>Inspect</button>
                         </div>
                     </div>
