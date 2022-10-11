@@ -144,10 +144,10 @@ export class JwtInterceptor implements HttpInterceptor {
           );
         }
       } else {
-        return throwError(err);
+        return throwError(err)
       }
     } else {
-      return throwError(err);
+      return throwError(err)
     }
   }
 

@@ -129,8 +129,12 @@ export class SessionService {
       const response: any = await this.request.get(
         `${environment.AUTH_API_URL}/user`
       );
+      if (response.status !== 200) {
+        this.logout()
+      }
       this.user.set(response.body as User);
     } catch (err) {
+      this.logout()
       throw err;
     }
   }
@@ -208,12 +212,12 @@ export class SessionService {
   }): Promise<boolean> {
     try {
       const decoded: any = await jwt_decode(options.token);
-      console.log(
-        'Comparing token for expiration',
-        decoded.exp * 1000,
-        Date.now(),
-        'Time Left: ' + (decoded.exp * 1000 - Date.now())
-      );
+      // console.log(
+      //   'Comparing token for expiration',
+      //   decoded.exp * 1000,
+      //   Date.now(),
+      //   'Time Left: ' + (decoded.exp * 1000 - Date.now())
+      // );
       const isExpired = decoded.exp * 1000 - Date.now() <= options.threshold;
       return isExpired;
     } catch (err) {

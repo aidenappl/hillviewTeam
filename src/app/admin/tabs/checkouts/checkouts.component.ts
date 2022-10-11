@@ -64,7 +64,6 @@ export class CheckoutsComponent implements OnInit {
   async formatCheckouts(checkouts: Checkout[]): Promise<Checkout[]> {
     try {
       checkouts.forEach((checkout: Checkout) => {
-        console.log(checkout)
         checkout.display = {
           time_out: dayjs(checkout.time_out).format("MM/DD/YY hh:mm A"),
         time_in: checkout.time_in ? dayjs(checkout.time_in).format("MM/DD/YY hh:mm A") : (checkout.expected_in ? `Expected : ${dayjs(checkout.expected_in).format("MM/DD/YY")}` : 'Not Returned')

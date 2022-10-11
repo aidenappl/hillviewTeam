@@ -17,7 +17,7 @@ export class RequestService {
           const response = await this.http.post(url, body, { observe: 'response' }).toPromise()
           return response!;
       } catch (error) {
-          throw error
+          return {} as HttpResponse<object>;
       }
   }
   
@@ -26,7 +26,7 @@ export class RequestService {
         const response = await this.http.get(url, { observe: 'response' }).toPromise()
         return response!;
     } catch (error) {
-        throw error
+        return {} as HttpResponse<object>;
     }
 }
 }
