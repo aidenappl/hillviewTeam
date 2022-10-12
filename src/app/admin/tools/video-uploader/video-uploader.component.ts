@@ -125,16 +125,17 @@ export class VideoUploaderComponent implements OnInit {
                             this.data.uploadedFileName =
                                 'Uploaded! ' + filename;
                         }
-                    }
-                    if (resp.type === HttpEventType.UploadProgress) {
+                    } else if (resp.type === HttpEventType.UploadProgress) {
                         const percentDone = Math.round(
                             (100 * resp.loaded) / resp.total!
                         );
                         this.data.progress = percentDone;
+                    } else {
+                        console.log('ext resp', resp)
                     }
-                });
+                })
         } catch (error) {
-            console.error(error);
+            console.error('upload err', error);
         }
     }
 

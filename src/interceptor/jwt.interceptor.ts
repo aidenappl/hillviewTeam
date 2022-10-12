@@ -47,10 +47,10 @@ export class JwtInterceptor implements HttpInterceptor {
               case 500:
                 return this.handle500Error(request, next, err);
               default:
-                return throwError(err);
+                return next.handle(request);
             }
           } else {
-            return throwError(err);
+            return next.handle(request);
           }
         })
       );
