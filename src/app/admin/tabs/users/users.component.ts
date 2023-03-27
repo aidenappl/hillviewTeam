@@ -246,12 +246,19 @@ export class UsersComponent implements OnInit {
         }
     }
 
-    claimUsername(user: User): void {
+    async claimUsername(user: User): Promise<void> {
         let person = prompt('Please enter a username', '');
         if (person == null || person == '') {
             console.error('No input into Prompt');
         } else {
             user.username = person;
+            await this.updateSystemUser({
+                id: user.id,
+                authentication: user.authentication,
+                name: user.name,
+                email: user.email,
+                username: user.username,
+            })
         }
     }
 }
