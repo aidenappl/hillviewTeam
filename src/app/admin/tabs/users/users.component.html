@@ -1,6 +1,9 @@
 <div class="page-wrapper">
     <!-- User Popup -->
-    <div class="popup-container fullCenter" *ngIf="showUserPopup && selectedUser">
+    <div
+        class="popup-container fullCenter"
+        *ngIf="showUserPopup && selectedUser"
+    >
         <div class="header">
             <h2>Edit User</h2>
             <div class="close" (click)="toggleUserPopup(false)">
@@ -14,33 +17,100 @@
         <div class="inputs-section">
             <div class="input-wrapper">
                 <p class="input-title">Name</p>
-                <input type="text" #nameInspectInput [value]="selectedUser.name"/>
+                <input
+                    type="text"
+                    #nameInspectInput
+                    [value]="selectedUser.name"
+                />
             </div>
             <div class="input-wrapper">
                 <p class="input-title">Email</p>
-                <input type="text" #emailInspectInput [value]="selectedUser.email"/>
+                <input
+                    type="text"
+                    #emailInspectInput
+                    [value]="selectedUser.email"
+                />
             </div>
             <div class="input-wrapper">
                 <p class="input-title">StudentID</p>
-                <input type="text" #identifierInspectInput [value]="selectedUser.identifier"/>
+                <input
+                    type="text"
+                    #identifierInspectInput
+                    [value]="selectedUser.identifier"
+                />
             </div>
             <div class="input-wrapper">
-                <p class="input-title" >Status </p>
-                <select type="text" #selectStatus [value]="selectedUser.status.id">
-                    <option value="1" *ngIf="let status in "></option>
+                <p class="input-title">Status</p>
+                <select
+                    type="text"
+                    #selectStatus
+                    [value]="selectedUser.status.id"
+                >
+                    <option
+                        value="1"
+                        *ngIf="let status; in: adminStatuses"
+                    ></option>
                 </select>
             </div>
         </div>
     </div>
+    <!-- Edit Admin Popup -->
+    <div
+        class="popup-container fullCenter"
+        *ngIf="showAdminPopup && selectedAdmin"
+    >
+        <div class="header">
+            <h2>Edit Team Member</h2>
+            <div class="close" (click)="toggleAdminPopup(false)">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                    <path
+                        d="M312.1 375c9.369 9.369 9.369 24.57 0 33.94s-24.57 9.369-33.94 0L160 289.9l-119 119c-9.369 9.369-24.57 9.369-33.94 0s-9.369-24.57 0-33.94L126.1 256L7.027 136.1c-9.369-9.369-9.369-24.57 0-33.94s24.57-9.369 33.94 0L160 222.1l119-119c9.369-9.369 24.57-9.369 33.94 0s9.369 24.57 0 33.94L193.9 256L312.1 375z"
+                    />
+                </svg>
+            </div>
+        </div>
+        <div class="inputs-section">
+            <div class="input-wrapper">
+                <p class="input-title">Name</p>
+                <input
+                    type="text"
+                    #nameInspectInput
+                    [value]="selectedAdmin.name"
+                />
+            </div>
+            <div class="input-wrapper">
+                <p class="input-title">Email</p>
+                <input
+                    type="text"
+                    #emailInspectInput
+                    [value]="selectedAdmin.email"
+                />
+            </div>
+            <div class="input-wrapper">
+                <p class="input-title">Authorization</p>
+                <select
+                    type="text"
+                    #selectStatus
+                    [value]="selectedAdmin.authentication.id"
+                >
+                    <option value="1">Unauthorized</option>
+                    <option value="2">Student</option>
+                    <option value="3">Admin</option>
+                </select>
+            </div>
+            <div class="input-wrapper" (click)="saveAdmin()">
+                <button>Save User</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Admin Container -->
     <div class="admin-container">
         <app-admin-header [title]="'System Users'"></app-admin-header>
         <div class="admin-primary-body">
             <div class="data-header">
                 <h2 class="fullYCenter">
-                    {{
-                        selectedDatabase === "system" ? "Dashboard" : "Mobile"
-                    }}
+                    {{ selectedDatabase === "system" ? "Dashboard" : "Mobile" }}
                     Accounts
                 </h2>
                 <div class="right-container">
@@ -183,7 +253,10 @@
                         <p>{{ user.authentication.name }}</p>
                     </div>
                     <div class="object">
-                        <div class="central-inputs fullCenter">
+                        <div
+                            class="central-inputs fullCenter"
+                            (click)="openAdminPop(user)"
+                        >
                             <button>Inspect</button>
                         </div>
                     </div>
@@ -219,7 +292,10 @@
                     </div>
                     <div class="object mobile"><p>Pending</p></div>
                     <div class="object mobile">
-                        <div class="central-inputs fullCenter" (click)="openUserPop(user)">
+                        <div
+                            class="central-inputs fullCenter"
+                            (click)="openUserPop(user)"
+                        >
                             <button>Inspect</button>
                         </div>
                     </div>

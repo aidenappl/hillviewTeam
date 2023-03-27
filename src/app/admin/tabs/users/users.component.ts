@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { MobileUser, User } from 'src/providers/user.interface';
 import { RequestService } from 'src/services/http/request.service';
@@ -24,10 +24,38 @@ export interface GeneralNSM {
     templateUrl: './users.component.html',
     styleUrls: ['./users.component.scss'],
 })
+
 export class UsersComponent implements OnInit {
     loaded = false;
+    // User popup
     showUserPopup = false;
     selectedUser: any = null;
+
+    // Admin popup
+    showAdminPopup = false;
+    selectedAdmin: any = null;
+
+    @ViewChild('selectStatus', { static: false }) selectStatus: any;
+    @ViewChild('nameInspectInput', { static: false }) nameInspectInput: any;
+    @ViewChild('emailInspectInput', { static: false }) emailInspectInput: any;
+
+    adminStatuses = [
+        {
+            id: 1,
+            name: 'Unauthorized',
+            short_name: 'unauthorized',
+        },
+        {
+            id: 2,
+            name: 'Student',
+            short_name: 'student',
+        },
+        {
+            id: 3,
+            name: 'Admin',
+            short_name: 'admin',
+        },
+    ];
 
     selectedDatabase = 'system';
 
@@ -80,6 +108,33 @@ export class UsersComponent implements OnInit {
         this.selectedUser = user;
     }
 
+    // Admin Popup
+
+    toggleAdminPopup(force?: boolean): void {
+        this.showAdminPopup = force || !this.showAdminPopup;
+    }
+
+    openAdminPop(admin: any): void {
+        console.log(admin);
+        this.showAdminPopup = true;
+        this.selectedAdmin = admin;
+    }
+
+    async saveAdmin(): Promise<void> {
+        let response = await this.updateSystemUser({
+            id: this.selectedAdmin.id,
+            authentication: parseInt(this.selectStatus.nativeElement.value),
+            name: this.nameInspectInput.nativeElement.value,
+            email: this.emailInspectInput.nativeElement.value,
+        })
+        console.log(response)
+        this.showAdminPopup = false;
+        this.selectedAdmin = null;
+        this.initialize();
+    }
+    
+    // Init
+
     async initialize(): Promise<void> {
         try {
             if (this.selectedDatabase === 'mobile') {
@@ -95,6 +150,21 @@ export class UsersComponent implements OnInit {
             console.error(error);
         }
     }
+
+    // Update System User Request
+
+    async updateSystemUser(request: any): Promise<any> {
+        try {
+            const response = await this.request.post(
+                `${environment.CORE_API_URL}/admin/edit/adminUser`,
+                request
+            );
+            return response.body as any;
+        } catch (error) {
+            throw error;
+        }
+    }
+
 
     // System User Request
 

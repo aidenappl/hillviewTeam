@@ -4,7 +4,7 @@
     height: fit-content;
     min-height: 500px;
     background-color: white;
-    z-index: 10;
+    z-index: 11;
     border-radius: 15px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
     padding: 2.5rem;
@@ -36,6 +36,19 @@
         svg {
             width: 22px;
             height: 22px;
+        }
+    }
+    .input-wrapper {
+        button {
+            width: 200px;
+            height: 48px;
+            background: #3067f6;
+            color: white;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 15px;
         }
     }
 }
