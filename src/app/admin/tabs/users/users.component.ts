@@ -254,7 +254,7 @@ export class UsersComponent implements OnInit {
             user.username = person;
             await this.updateSystemUser({
                 id: user.id,
-                authentication: user.authentication,
+                authentication: user.authentication.id,
                 name: user.name,
                 email: user.email,
                 username: user.username,
