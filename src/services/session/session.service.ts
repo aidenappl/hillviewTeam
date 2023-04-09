@@ -127,7 +127,7 @@ export class SessionService {
   async initializeUser(): Promise<void> {
     try {
       const response: any = await this.request.get(
-        `${environment.AUTH_API_URL}/user`
+        `${environment.AUTH_API_URL}/self`
       );
       if (response.status !== 200) {
         this.logout()

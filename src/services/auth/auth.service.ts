@@ -16,7 +16,8 @@ export class AuthService {
   async google(): Promise<boolean> {
     try {
       const response: GoogleResponse = await this.authService.signIn(
-        GoogleLoginProvider.PROVIDER_ID
+        GoogleLoginProvider.PROVIDER_ID,
+        
       );
       if (
         response.email &&
