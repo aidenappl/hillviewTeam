@@ -1,0 +1,16 @@
+commands:
+    - name: start
+      description: Start the development server
+      run: npm start
+    - name: build
+      description: Build the project for production
+      run: npm run build
+    - name: watch
+      description: Build with watch mode for development
+      run: npm run watch
+    - name: test
+      description: Run unit tests via Karma
+      run: npm test
+    - name: install
+      description: Install dependencies
+      run: npm install

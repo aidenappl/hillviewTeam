@@ -1,4 +1,11 @@
-# HillviewTeam
+# ⚠️ DEPRECATED
+
+> **This repository is deprecated and no longer maintained.**  
+> Please use [hillview-tv-web](https://github.com/aidenappl/hillview-tv-web) instead.
+
+---
+
+# HillviewTeam (Legacy)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.1.
 
